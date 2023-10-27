@@ -8,7 +8,8 @@ AFRAME.registerComponent('button', {
     init: function () {
       var el = this.el;
       var labelEl = this.labelEl = document.createElement('a-entity');
-  
+      this.triggerdown = false
+      this.intersected = false
       this.color = '#3a50c5';
       el.setAttribute('geometry', {
         primitive: 'box',
@@ -31,10 +32,34 @@ AFRAME.registerComponent('button', {
       this.el.appendChild(labelEl);
   
       this.bindMethods();
+      
+      this.controllers = document.querySelectorAll(".controller").forEach((e) => {
+        e.addEventListener("triggerdown", (e) => {
+          this.triggerdown = true
+          if(this.intersected){
+            this.onPressedStarted
+          }
+        })
+
+        e.addEventListener("triggerup", (e) => {
+          this.triggerdown = false
+          if(this.intersected){
+            this.onPressedEnded
+          }
+        })
+      })
+      
       this.el.addEventListener('stateadded', this.stateChanged);
       this.el.addEventListener('stateremoved', this.stateChanged);
       this.el.addEventListener('pressedstarted', this.onPressedStarted);
       this.el.addEventListener('pressedended', this.onPressedEnded);
+      this.el.addEventListener('raycaster-intersected', (e)=>{
+        this.intersected = true
+      });
+      this.el.addEventListener('raycaster-intersected-cleared', (e) => {
+        this.intersected = false
+        this.onPressedEnded
+      });
     },
   
     bindMethods: function () {

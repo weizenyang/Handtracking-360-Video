@@ -4,7 +4,7 @@ AFRAME.registerComponent('event-manager', {
     init: function () {
       this.bindMethods();
   
-      this.videoSelector = document.querySelector('.video-selector');
+      this.videoSelector = document.querySelectorAll('.video-selector');
       this.videoSphere = document.querySelector("#videoSphere")
       this.buttonToGeometry = {};
 

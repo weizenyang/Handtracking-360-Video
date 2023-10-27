@@ -38,13 +38,17 @@ import Layout from "../layouts/Layout.astro";
         ></a-entity>
         <a-entity id="menu" menu position="0 1.0 -0.5" rotation="-45 0 0" event-manager>
           <a-entity slider position="0 0.10 0"></a-entity>
-          <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0"></a-entity>
+          <a-entity id="sphereButton" button="label: Video 1" position="-0.15 0 0"></a-entity>
           <a-entity id="boxButton" button="label: box" position="0 0 0"></a-entity>
           <a-entity id="torusButton" button="label: torus" position="0.15 0 0"></a-entity>
           <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
         </a-entity>
+        
+        <a-entity class="controller" oculus-touch-controls="hand: left" raycaster="showLine: true"></a-entity>
+        <a-entity class="controller" oculus-touch-controls="hand: right" raycaster="showLine: true"></a-entity>
+<!-- 
         <a-entity hand-tracking-controls="hand: left" raycaster="showLine: true"></a-entity>
-        <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity>
+        <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity> -->
       </a-scene>
 </Layout>
 

@@ -41,14 +41,14 @@ import Card from '../components/Card.astro';
             <image id="ui-backplate" src="/UI-Border.png"></image>
         </a-assets>
         
-        <a-entity id="leftHand"  hand-tracking-controls="hand: left; modelColor:#555555" collider-check>
+        <!-- <a-entity id="leftHand"  hand-tracking-controls="hand: left; modelColor:#555555">
             <a-text id="leftText" material="side: double"></a-text>
             <a-entity raycaster="objects: .collidable; showLine: true;"></a-entity>
         </a-entity>
-        <a-entity id="rightHand"  hand-tracking-controls="hand: right; modelColor:#555555" collider-check>
+        <a-entity id="rightHand"  hand-tracking-controls="hand: right; modelColor:#555555">
             <a-text id="rightText" material="side: double"></a-text>
             <a-entity raycaster="objects: .collidable; showLine: true;"></a-entity>
-        </a-entity>
+        </a-entity> -->
 
         
 
@@ -69,8 +69,8 @@ import Card from '../components/Card.astro';
             <a-entity class="video-selector" id="video-3" button="label: video-3" position="0.15 0 0"></a-entity>
             <a-entity class="video-selector" id="video-4" button="label: video-4; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
           </a-entity>
-          <a-entity hand-tracking-controls="hand: left" raycaster="showLine: true"></a-entity>
-          <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity>
+          <!-- <a-entity hand-tracking-controls="hand: left" raycaster="showLine: true"></a-entity>
+          <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity> -->
         </a-scene>
         <!-- <a-sky class="not-collidable" color="#777777"></a-sky> -->
         <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
@@ -86,36 +86,18 @@ import Card from '../components/Card.astro';
 
         <a-camera
             user-height="0.5"
-            
+            collider-check
         >
         
         </a-camera>
-        
-        <!-- Text element for display messaging.  Hide once video is playing. -->
-            <!-- <a-entity
-                id="msg"
-                position="0 -0.3 -1.5"
-                text="align:center; width:3; wrapCount:100; color:red; value:Click window to make the video play, if needed."
-                hide-once-playing="#video"
-            >
-            </a-entity> -->
-
-        <!-- Wait for the video to load. -->
-        
     </a-scene>
 </Layout>
 		
 <script>
     
-	var el = document.querySelector('#my-element');
-    var object = el.getObject3D('mesh');
-
-    // compute bounding box
-    var bbox = new THREE.Box3().setFromObject(obj);
-    console.log(bbox.min, bbox.max)
 	
-    document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
-    document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
+    // document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
+    // document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
     
     AFRAME.registerComponent('collider-check', {
   dependencies: ['raycaster'],
