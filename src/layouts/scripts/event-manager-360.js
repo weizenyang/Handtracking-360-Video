@@ -26,11 +26,11 @@ AFRAME.registerComponent('event-manager', {
     onClick: function (evt) {
       console.log(evt.target)
       var targetEl = evt.target;
-      console.log(this.videoSphere)
-      if(this.videoSphere.src == `#${targetEl.id}`){
-        this.videoSphere.src = ""
+      console.log(this.videoSphere.components.material.data.src)
+      if(this.videoSphere.components.material.data.src == `#${targetEl.id}`){
+        this.videoSphere.components.material.data.src = ""
       } else {
-        this.videoSphere.src = `#${targetEl.id}`
+        this.videoSphere.components.material.data.src = `#${targetEl.id}`
       }
       
       // if (targetEl === this.boxButtonEl ||
