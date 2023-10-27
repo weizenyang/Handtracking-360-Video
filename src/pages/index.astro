@@ -5,42 +5,8 @@ import Card from '../components/Card.astro';
 ---
 
 <Layout title='hand-tracking'>
+    
     <a-scene>
-        <a-entity id="leftHand" hand-tracking-controls="hand: left; modelColor:#555555" >
-            
-        </a-entity>
-        <a-entity id="rightHand" hand-tracking-controls="hand: right; modelColor:#555555">
-            
-        </a-entity>
-
-        <a-entity slice9="width: 3; height: 2; left: 1; right: 1; top; 1; bottom: 1; opacity: 0.5; transparent: true;"></a-entity>
-
-        <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
-        <!-- <a-videosphere
-            rotation="0 180 0"
-            src="#video"
-            play-on-window-click
-            play-on-vrdisplayactivate-or-enter-vr
-        >
-        </a-videosphere> -->
-        <!-- <a-passthrough width="16" height="9"></a-passthrough> -->
-
-        <a-camera
-            user-height="0"
-            wasd-controls-enabled="false"
-            arrow-key-rotation
-        >
-            <!-- Text element for display messaging.  Hide once video is playing. -->
-            <!-- <a-entity
-                id="msg"
-                position="0 -0.3 -1.5"
-                text="align:center; width:3; wrapCount:100; color:red; value:Click window to make the video play, if needed."
-                hide-once-playing="#video"
-            >
-            </a-entity> -->
-        </a-camera>
-
-        <!-- Wait for the video to load. -->
         <a-assets>
             <!-- Single source video. -->
             <!-- <video
@@ -55,15 +21,167 @@ import Card from '../components/Card.astro';
                 <source
                     type="video/mp4"
                     src="/neom_-_360.mp4"
-                />
-            </video> -->
+                /> -->
+                <image id="ui-backplate" src="/UI-Backplate.png"></image>
+                <image id="ui-backplate" src="/UI-Border.png"></image>
+            </video>
         </a-assets>
+        
+        <a-entity id="leftHand" hand-tracking-controls="hand: left; modelColor:#555555" >
+            <a-text id="leftText" material="side: double"></a-text>
+            <a-entity raycaster="objects: .collidable"></a-entity>
+        </a-entity>
+        <a-entity id="rightHand" hand-tracking-controls="hand: right; modelColor:#555555">
+            <a-text id="rightText" material="side: double"></a-text>
+            <a-entity raycaster="objects: .collidable"></a-entity>
+        </a-entity>
+
+        <a-box color="tomato" depth="1" height="1" width="1" position="1 0 -2">
+
+        </a-box>
+
+        <!--  left: 1; right: 1; top; 1; bottom: 1; -->
+        <a-entity class="collidable ui">
+            <a-entity class="background" slice9="left:90; right: 310; top: 90; bottom: 310; side: double; padding: 0.2; src: /UI-Backplate.png" position="0 1 -2"></a-entity>
+            <a-entity class="border" slice9="left:0; right: 0; top: 0; bottom: 0; side: double; padding: 0; src: /UI-Border.png; transparent: true; opacity: 0.5" position="0 1 -2"></a-entity>
+        </a-entity>
+        
+        <a-sky class="not-collidable" color="#777777"></a-sky>
+        <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
+        <!-- <a-videosphere
+            rotation="0 180 0"
+            src="#video"
+            play-on-window-click
+            play-on-vrdisplayactivate-or-enter-vr
+        >
+        </a-videosphere> -->
+        <!-- <a-passthrough width="16" height="9"></a-passthrough> -->
+
+        <a-camera
+            user-height="0.5"
+            collider-check
+        >
+        
+        </a-camera>
+        
+        <!-- Text element for display messaging.  Hide once video is playing. -->
+            <!-- <a-entity
+                id="msg"
+                position="0 -0.3 -1.5"
+                text="align:center; width:3; wrapCount:100; color:red; value:Click window to make the video play, if needed."
+                hide-once-playing="#video"
+            >
+            </a-entity> -->
+
+        <!-- Wait for the video to load. -->
+        
     </a-scene>
 </Layout>
 		
 <script>
+    
+	
+	
     document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
     document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
+    
+    AFRAME.registerComponent('collider-check', {
+  dependencies: ['raycaster'],
+
+  init: function () {
+    this.animate = false
+    this.el.addEventListener('raycaster-intersection', function (e) {
+      var intersectedItems = []
+      e.detail.els.map((i) => {
+        
+        if(i.classList.contains("collidable")){
+            
+            intersectedItems.push(i)
+        } else if(i.object3D.el.parentEl.classList.contains("collidable")){
+            intersectedItems.push(i.object3D.el.parentEl)
+        }
+      })
+      console.log(intersectedItems)
+      if(intersectedItems.length > 1){
+        if(intersectedItems[0].classList.contains('ui')){
+        const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
+        
+        currentAtt.left = 90
+        currentAtt.top = 90
+        currentAtt.right = 310
+        currentAtt.bottom = 310
+        // left:90; right: 310; top: 90; bottom: 310;
+        // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
+        console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
+        const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
+        intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
+      }
+      }
+      
+    });
+    var intersectedItems = []
+    this.el.addEventListener('raycaster-intersection', function (e) {
+      
+      e.detail.els.map((i) => {
+        
+        if(i.classList.contains("collidable")){
+            
+            intersectedItems.push(i)
+        } else if(i.object3D.el.parentEl.classList.contains("collidable")){
+            intersectedItems.push(i.object3D.el.parentEl)
+        }
+      })
+      console.log(intersectedItems)
+      if(intersectedItems.length > 1){
+        if(intersectedItems[0].classList.contains('ui')){
+        const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
+        
+        currentAtt.left = 90
+        currentAtt.top = 90
+        currentAtt.right = 310
+        currentAtt.bottom = 310
+        currentAtt.padding = 0.2
+        // left:90; right: 310; top: 90; bottom: 310;
+        // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
+        console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
+        const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
+        intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
+      }
+      }
+      
+    });
+
+    this.el.addEventListener('raycaster-intersection-cleared', function (e) {
+      
+      console.log(intersectedItems)
+      if(intersectedItems.length > 1){
+        intersectedItems.forEach(e => {
+            if(intersectedItems[0].classList.contains('ui')){
+        const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
+        
+        currentAtt.left = 0
+        currentAtt.top = 0
+        currentAtt.right = 0
+        currentAtt.bottom = 0
+        currentAtt.padding = 0
+        // left:90; right: 310; top: 90; bottom: 310;
+        // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
+        console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
+        const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
+        intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
+      }
+        })
+        intersectedItems = []
+      }
+      
+    });
+
+    
+  }, 
+  tick(){
+    
+}
+});
 </script>
 
 <!-- <script src="https://aframe.io/releases/1.4.0/aframe.min.js" is:inline></script> -->

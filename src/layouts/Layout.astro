@@ -10,10 +10,13 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<script src="https://aframe.io/releases/1.4.0/aframe.min.js" is:inline></script>
+		<script src="https://github.com/etiennepinchon/aframe-rounded" is:inline></script>
+		<script src="./scripts/aframe-rounded.js"></script>
 		<script src="./scripts/arrow-key-rotation.js"></script>
 		<script src="./scripts/play-on-window-click.js"></script>
 		<script src="./scripts/play-on-vrdisplayactivate-or-enter-vr.js"></script>
 		<script src="./scripts/hide-once-playing.js"></script>
+		<script src="https://unpkg.com/aframe-slice9-component/dist/aframe-slice9-component.min.js"></script>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
@@ -25,6 +28,8 @@ const { title } = Astro.props;
 		
 		<slot />
 	</body>
+
+	
 </html>
 <style is:global>
 	:root {
