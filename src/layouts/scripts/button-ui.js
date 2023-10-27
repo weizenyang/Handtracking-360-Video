@@ -48,11 +48,16 @@ AFRAME.registerComponent('button', {
           }
         })
       })
+
+      // setInterval((e) => {
+      //   this.el.emit("hoverstarted")
+      // }, 10000)
       
       this.el.addEventListener('stateadded', this.stateChanged);
       this.el.addEventListener('stateremoved', this.stateChanged);
       this.el.addEventListener('pressedstarted', this.onPressedStarted);
       this.el.addEventListener('hoverstarted', this.onHoverStarted);
+      this.el.addEventListener('hoverupdated', this.onHoverUpdated);
       this.el.addEventListener('hoverended', this.onHoverEnded);
       this.el.addEventListener('pressedended', this.onPressedEnded);
       this.el.addEventListener('raycaster-intersected', (e)=>{
@@ -98,24 +103,35 @@ AFRAME.registerComponent('button', {
     },
 
     onHoverStarted: function () {
-      var el = this.el;
+      var el = this;
       console.log("Hover Started")
-      console.log(el)
+      console.log(this)
       // el.setAttribute('material', {color: 'green'});
-      el.querySelector(".border").object3D.visible = true;
+      el.querySelector(".border").setAttribute("visible", "true")
+    },
+
+    onHoverUpdated: function () {
+      var el = this;
+      console.log("Hover Started")
+      console.log(this)
+      // el.setAttribute('material', {color: 'green'});
+      el.querySelector(".border").setAttribute("visible", "true")
     },
 
     onHoverEnded: function () {
-      var el = this.el;
+      var el = this;
       // el.setAttribute('material', {color: 'green'});
       console.log("Hover Ended")
-      console.log(el)
-        el.querySelector(".border").object3D.visible = false;
+      console.log(this)
+      el.querySelector(".border").setAttribute("visible", "false")
     },
   
     onPressedEnded: function () {
       if (this.el.is('pressed')) { return; }
       console.log("Press Ended")
       this.el.setAttribute('material', {color: this.color});
+    }, 
+    tick(){
+      
     }
   });
