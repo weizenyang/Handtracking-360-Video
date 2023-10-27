@@ -38,7 +38,10 @@ AFRAME.registerComponent('event-manager', {
         sphere.setAttribute(`autoplay`, ``)
         
         container.appendChild(sphere)
-        document.querySelector(`a-videosphere`).components.material.material.map.image.play();
+        setTimeout((e) => {
+          document.querySelector(`a-videosphere`).components.material.material.map.image.play();
+        }, 500)
+        
         // document.querySelector(`#sphere-${targetEl.id}`).object3D.visible = "true"
         // document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.play();
         console.log("target " + `#${targetEl.id}`)
