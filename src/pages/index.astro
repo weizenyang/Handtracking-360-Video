@@ -9,10 +9,9 @@ import Card from '../components/Card.astro';
     <a-scene>
         <a-assets>
             <!-- Single source video. -->
-            <!-- <video
-                id="video"
+            <video
+                id="video-1"
                 style="display:none"
-                autoplay
                 loop
                 crossorigin="anonymous"
                 playsinline
@@ -21,10 +20,25 @@ import Card from '../components/Card.astro';
                 <source
                     type="video/mp4"
                     src="/neom_-_360.mp4"
-                /> -->
-                <image id="ui-backplate" src="/UI-Backplate.png"></image>
-                <image id="ui-backplate" src="/UI-Border.png"></image>
+                />
             </video>
+
+            <video
+                id="video-2"
+                style="display:none"
+                loop
+                crossorigin="anonymous"
+                playsinline
+                webkit-playsinline
+            >
+                <source
+                    type="video/mp4"
+                    src="/sagia_scene_setter.mp4"
+                />
+            </video>
+
+            <image id="ui-backplate" src="/UI-Backplate.png"></image>
+            <image id="ui-backplate" src="/UI-Border.png"></image>
         </a-assets>
         
         <a-entity id="leftHand"  hand-tracking-controls="hand: left; modelColor:#555555" collider-check>
@@ -47,16 +61,27 @@ import Card from '../components/Card.astro';
             <a-entity class="background" slice9="left:90; right: 310; top: 90; bottom: 310; side: double; padding: 0.2; src: /UI-Backplate.png" position="0 1 -2"></a-entity>
             <a-entity class="border" slice9="left:0; right: 0; top: 0; bottom: 0; side: double; padding: 0; src: /UI-Border.png; transparent: true; opacity: 0.5" position="0 1 -2"></a-entity>
         </a-entity>
-        
-        <a-sky class="not-collidable" color="#777777"></a-sky>
+
+        <a-entity id="menu" menu position="0 1.0 -0.5" rotation="-45 0 0" event-manager>
+            <a-entity slider position="0 0.10 0"></a-entity>
+            <a-entity class="video-selector" id="video-1" button="label: video-1; " position="-0.15 0 0"></a-entity>
+            <a-entity class="video-selector" id="video-2" button="label: video-2" position="0 0 0"></a-entity>
+            <a-entity class="video-selector" id="video-3" button="label: video-3" position="0.15 0 0"></a-entity>
+            <a-entity class="video-selector" id="video-4" button="label: video-4; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
+          </a-entity>
+          <a-entity hand-tracking-controls="hand: left" raycaster="showLine: true"></a-entity>
+          <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity>
+        </a-scene>
+        <!-- <a-sky class="not-collidable" color="#777777"></a-sky> -->
         <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
-        <!-- <a-videosphere
+        <a-videosphere
             rotation="0 180 0"
-            src="#video"
+            src="#video-1"
+            id="videoSphere"
             play-on-window-click
             play-on-vrdisplayactivate-or-enter-vr
         >
-        </a-videosphere> -->
+        </a-videosphere>
         <!-- <a-passthrough width="16" height="9"></a-passthrough> -->
 
         <a-camera

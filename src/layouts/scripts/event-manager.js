@@ -6,8 +6,7 @@ AFRAME.registerComponent('event-manager', {
   
       this.boxGeometryEl = document.querySelector('#boxGeometry');
       this.sphereGeometryEl = document.querySelector('#sphereGeometry');
-      this.torusGeometryEl = document.querySelector('#torusGeometry');
-  
+      this.torusGeometryEl = document.querySelector('#torusGeometry');  
       this.boxButtonEl = document.querySelector('#boxButton');
       this.sphereButtonEl = document.querySelector('#sphereButton');
       this.torusButtonEl = document.querySelector('#torusButton');
