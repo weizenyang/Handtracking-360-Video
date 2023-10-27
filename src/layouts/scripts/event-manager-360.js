@@ -32,7 +32,7 @@ AFRAME.registerComponent('event-manager', {
           e.components.material.material.map.image.pause();
         })
         document.querySelector(`#sphere-${targetEl.id}`).object3D.visible = "true"
-        document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.pause();
+        document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.play();
         console.log("target " + `#${targetEl.id}`)
       
       
