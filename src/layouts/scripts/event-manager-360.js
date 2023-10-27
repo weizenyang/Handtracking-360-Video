@@ -25,10 +25,10 @@ AFRAME.registerComponent('event-manager', {
   
     onClick: function (evt) {
       var targetEl = evt.target;
-      if(this.videoSphere.src == `#${evt.target.id}`){
+      if(this.videoSphere.src == `#${targetEl.id}`){
         this.videoSphere.src = ""
       } else {
-        this.videoSphere.src = `#${targetEl}`
+        this.videoSphere.src = `#${targetEl.id}`
       }
       
       // if (targetEl === this.boxButtonEl ||
