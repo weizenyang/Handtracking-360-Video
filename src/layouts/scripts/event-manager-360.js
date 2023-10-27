@@ -28,9 +28,15 @@ AFRAME.registerComponent('event-manager', {
       var targetEl = evt.target;
       console.log(this.videoSphere.components.material.data.src)
       if(this.videoSphere.components.material.data.src == `#${targetEl.id}`){
+        console.log("clear")
         this.videoSphere.components.material.data.src = ""
+        console.log(this.videoSphere.components.material.data.src)
+        console.log("target " + `#${targetEl.id}`)
       } else {
+        console.log("change id")
         this.videoSphere.components.material.data.src = `#${targetEl.id}`
+        console.log(this.videoSphere.components.material.data.src)
+        console.log("target " + `#${targetEl.id}`)
       }
       
       // if (targetEl === this.boxButtonEl ||

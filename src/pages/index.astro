@@ -104,8 +104,9 @@ import Card from '../components/Card.astro';
 
   init: function () {
     this.animate = false
+    var intersectedItems = []
     this.el.addEventListener('raycaster-intersection', function (e) {
-      var intersectedItems = []
+      
       e.detail.els.map((i) => {
         
         if(i.classList.contains("collidable")){
@@ -133,7 +134,7 @@ import Card from '../components/Card.astro';
       }
       
     });
-    var intersectedItems = []
+    
     this.el.addEventListener('raycaster-intersection', function (e) {
       
       e.detail.els.map((i) => {
@@ -167,7 +168,7 @@ import Card from '../components/Card.astro';
 
     this.el.addEventListener('raycaster-intersection-cleared', function (e) {
       
-      console.log(intersectedItems)
+    //   console.log(intersectedItems)
       if(intersectedItems.length > 1){
         intersectedItems.forEach(e => {
             if(intersectedItems[0].classList.contains('ui')){
