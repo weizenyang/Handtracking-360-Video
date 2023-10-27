@@ -14,6 +14,7 @@ import Card from '../components/Card.astro';
                 style="display:none"
                 loop
                 crossorigin="anonymous"
+                
                 playsinline
                 webkit-playsinline
             >
@@ -69,11 +70,10 @@ import Card from '../components/Card.astro';
             <a-entity class="video-selector" id="video-3" button="label: video-3" position="0.15 0 0"></a-entity>
             <a-entity class="video-selector" id="video-4" button="label: video-4; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
           </a-entity>
-          <!-- <a-entity hand-tracking-controls="hand: left" raycaster="showLine: true"></a-entity>
-          <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity> -->
-        </a-scene>
-        <!-- <a-sky class="not-collidable" color="#777777"></a-sky> -->
-        <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
+          <a-entity hand-tracking-controls="hand: left" raycaster="showLine: true"></a-entity>
+          <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity>
+
+
         <a-videosphere
             rotation="0 180 0"
             src="#video-1"
