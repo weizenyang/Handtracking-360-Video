@@ -7,10 +7,10 @@ import Card from '../components/Card.astro';
 <Layout title='hand-tracking'>
     <a-scene>
         <a-entity id="leftHand" hand-tracking-controls="hand: left; modelColor:#55555533" >
-            <a-text id="leftText" value="Hello, World!"></a-text>
+            <a-text id="leftText" value="Hello, World!" position="0 0.5 0"></a-text>
         </a-entity>
         <a-entity id="rightHand" hand-tracking-controls="hand: right; modelColor:#55555533">
-            <a-text id="rightText" value="Hello, World!"></a-text>
+            <a-text id="rightText" value="Hello, World!" position="0 0.5 0"></a-text>
         </a-entity>
 
         <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
