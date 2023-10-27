@@ -6,8 +6,13 @@ import Card from '../components/Card.astro';
 
 <Layout title='hand-tracking'>
     <a-scene>
-        <a-entity hand-tracking-controls="hand: left" modelColor="#55555533"></a-entity>
-        <a-entity hand-tracking-controls="hand: right" modelColor="#55555533"></a-entity>
+        <a-entity id="leftHand" hand-tracking-controls="hand: left; modelColor:#55555533" >
+            <a-text id="leftText" value="Hello, World!"></a-text>
+        </a-entity>
+        <a-entity id="rightHand" hand-tracking-controls="hand: right; modelColor:#55555533">
+            <a-text id="rightText" value="Hello, World!"></a-text>
+        </a-entity>
+
         <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
         <!-- <a-videosphere
             rotation="0 180 0"
@@ -54,5 +59,9 @@ import Card from '../components/Card.astro';
     </a-scene>
 </Layout>
 		
+<script>
+    document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
+    document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
+</script>
 
 <!-- <script src="https://aframe.io/releases/1.4.0/aframe.min.js" is:inline></script> -->
