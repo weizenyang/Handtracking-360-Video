@@ -19,6 +19,7 @@ AFRAME.registerComponent('pressable', {
       for (var i = 0; i < handEls.length; i++) {
         handEl = handEls[i];
         distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
+        console.log(distance)
         if (distance < this.data.pressDistance) {
           if (!this.pressed) { this.el.emit('pressedstarted'); }
           this.pressed = true;
