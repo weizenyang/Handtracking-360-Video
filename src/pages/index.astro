@@ -29,11 +29,11 @@ import Card from '../components/Card.astro';
         
         <a-entity id="leftHand" hand-tracking-controls="hand: left; modelColor:#555555" collider-check>
             <a-text id="leftText" material="side: double"></a-text>
-            <a-entity raycaster="objects: .collidable"></a-entity>
+            <a-entity raycaster="objects: .collidable" showLine="true"></a-entity>
         </a-entity>
         <a-entity id="rightHand" hand-tracking-controls="hand: right; modelColor:#555555" collider-check>
             <a-text id="rightText" material="side: double"></a-text>
-            <a-entity raycaster="objects: .collidable"></a-entity>
+            <a-entity raycaster="objects: .collidable"  showLine="true"></a-entity>
         </a-entity>
 
         <a-box color="tomato" depth="1" height="1" width="1" position="1 0 -2">
