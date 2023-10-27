@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "aframe-passthrough-component": "^1.0.0",
+    "aframe-slice9-component": "^1.0.0",
     "astro": "^3.3.4",
     "ratk": "^0.2.1",
     "three": "^0.157.0"
