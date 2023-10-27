@@ -2,7 +2,7 @@
 AFRAME.registerComponent('pressable', {
     schema: {
       pressDistance: { default: 0.06 },
-      hoverDistance: { default: 0.11}
+      hoverDistance: { default: 0.16}
     },
   
     init: function () {
@@ -20,23 +20,24 @@ AFRAME.registerComponent('pressable', {
         handEl = handEls[i];
         distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
         console.log(distance)
-        if (distance < this.data.pressDistance) {
+        if (distance <= this.data.pressDistance) {
           if (!this.pressed) { this.el.emit('pressedstarted'); }
           this.pressed = true;
           this.hovered = false;
           return;
-        } else if(distance < this.data.hoverDistance){
-          if (!this.hovered) { this.el.emit('hoverstarted', {"distance": distance}); } 
+        } else if(distance < this.data.hoverDistance && distance > this.data.pressDistance){
+          if (!this.hovered) { this.el.emit('hoverstarted') } 
           else {
             this.el.emit('hoverupdate', {"distance": distance});
           }
           this.hovered = true;
-        } else{
+        } else {
+          if (this.hovered) { this.el.emit('hoverended') }
           this.hovered = false;
         }
       }
-      if (this.pressed) { this.el.emit('pressedended'); }
-      if (this.hovered) { this.el.emit('hoverended'); }
+      if (this.pressed) { this.el.emit('pressedended') }
+      // if (this.hovered) { this.el.emit('hoverended') }
       this.pressed = false;
       
     },
