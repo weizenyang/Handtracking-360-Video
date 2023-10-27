@@ -52,7 +52,8 @@ AFRAME.registerComponent('button', {
       this.el.addEventListener('stateadded', this.stateChanged);
       this.el.addEventListener('stateremoved', this.stateChanged);
       this.el.addEventListener('pressedstarted', this.onPressedStarted);
-      this.el.addEventListener('pressedhovered', this.onPressedHovered);
+      this.el.addEventListener('hoverstarted', this.onHoverStarted);
+      this.el.addEventListener('hoverended', this.onHoverEnded);
       this.el.addEventListener('pressedended', this.onPressedEnded);
       this.el.addEventListener('raycaster-intersected', (e)=>{
         this.intersected = true
@@ -99,7 +100,7 @@ AFRAME.registerComponent('button', {
       var el = this.el;
       // el.setAttribute('material', {color: 'green'});
       el.emit('hover');
-      el.querySelector(".border").object3D.visible = false;
+      el.querySelector(".border").object3D.visible = true;
     },
 
     onHoverEnded: function () {
