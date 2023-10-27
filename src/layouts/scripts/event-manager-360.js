@@ -33,15 +33,18 @@ AFRAME.registerComponent('event-manager', {
           e.components.material.material.map.image.pause();
           e.remove()
         })
-        const sphere = document.createElement("a-videosphere")
-        sphere.setAttribute("visible", "true")
-        sphere.setAttribute(`src`, `#${evt.target.id}`)
-        sphere.setAttribute(`autoplay`, ``)
+        if(evt.target.id.includes("video")){
+          const sphere = document.createElement("a-videosphere")
+          sphere.setAttribute("visible", "true")
+          sphere.setAttribute(`src`, `#${evt.target.id}`)
+          sphere.setAttribute(`autoplay`, ``)
+          
+          container.appendChild(sphere)
+          setTimeout((e) => {
+            document.querySelector(`a-videosphere`).components.material.material.map.image.play();
+          }, 500)
+        }
         
-        container.appendChild(sphere)
-        setTimeout((e) => {
-          document.querySelector(`a-videosphere`).components.material.material.map.image.play();
-        }, 500)
         
         // document.querySelector(`#sphere-${targetEl.id}`).object3D.visible = "true"
         // document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.play();
