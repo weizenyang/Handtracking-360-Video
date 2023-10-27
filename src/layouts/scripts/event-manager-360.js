@@ -29,7 +29,8 @@ AFRAME.registerComponent('event-manager', {
         const container = document.querySelector("#sphere-container")
         document.querySelectorAll("a-videosphere").forEach((e)=> {
           // e.object3D.visible = "false"
-          // e.components.material.material.map.image.pause();
+          e.components.material.data.src.currentTime = 0;
+          e.components.material.material.map.image.pause();
           e.remove()
         })
         const sphere = document.createElement("a-videosphere")
