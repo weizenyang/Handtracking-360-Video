@@ -6,8 +6,8 @@ import Card from '../components/Card.astro';
 
 <Layout title='hand-tracking'>
     <a-scene>
-        <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #cccccc00"></a-entity>
-<a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #cccccc00"></a-entity>
+        <a-entity hand-tracking-controls="hand: left"></a-entity>
+        <a-entity hand-tracking-controls="hand: right"></a-entity>
         <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
         <a-videosphere
             rotation="0 180 0"
