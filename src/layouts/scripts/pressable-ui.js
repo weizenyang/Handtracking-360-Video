@@ -25,7 +25,7 @@ AFRAME.registerComponent('pressable', {
           this.hovered = false;
           return;
         } else if(distance < this.data.hoverDistance){
-          if (!this.hovered) { this.el.emit('pressedhovered', {"distance": distance}); }
+          if (!this.hovered) { this.el.emit('hoverstarted', {"distance": distance}); }
           this.hovered = true;
         } else{
           this.hovered = false;

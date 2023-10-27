@@ -85,6 +85,7 @@ AFRAME.registerComponent('button', {
   
     onPressedStarted: function () {
       var el = this.el;
+      console.log("Press Started")
       // el.setAttribute('material', {color: 'green'});
       el.emit('click');
       if (this.data.togabble) {
@@ -98,6 +99,7 @@ AFRAME.registerComponent('button', {
 
     onHoverStarted: function () {
       var el = this.el;
+      console.log("Hover Started")
       // el.setAttribute('material', {color: 'green'});
       el.emit('hover');
       el.querySelector(".border").object3D.visible = true;
@@ -106,12 +108,14 @@ AFRAME.registerComponent('button', {
     onHoverEnded: function () {
       var el = this.el;
       // el.setAttribute('material', {color: 'green'});
+      console.log("Hover Ended")
       el.emit('hover');
         el.querySelector(".border").object3D.visible = false;
     },
   
     onPressedEnded: function () {
       if (this.el.is('pressed')) { return; }
+      console.log("Press Ended")
       this.el.setAttribute('material', {color: this.color});
     }
   });
