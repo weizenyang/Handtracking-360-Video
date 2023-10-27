@@ -68,14 +68,14 @@ import Card from '../components/Card.astro';
             <a-entity class="video-selector" id="video-1" button="label: video-1; " position="-0.15 0 0"></a-entity>
             <a-entity class="video-selector" id="video-2" button="label: video-2" position="0 0 0"></a-entity>
             <a-entity class="video-selector" id="video-3" button="label: video-3" position="0.15 0 0"></a-entity>
-            <a-entity class="video-selector" id="video-4" button="label: video-4; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
+            <a-entity id="clear" button="label: Clear; width: 0.20;" position="0 -0.10 0"></a-entity>
           </a-entity>
           <a-entity hand-tracking-controls="hand: left"></a-entity>
           <a-entity hand-tracking-controls="hand: right"></a-entity>
 
           <a-entity id="sphere-container">
             <a-videosphere
-                rotation="0 180 0"
+                rotation="0 90 0"
                 src="#video-1"
                 id="sphere-video-1"
                 visible="false"
