@@ -35,6 +35,7 @@ AFRAME.registerComponent('event-manager', {
       } else {
         console.log("change id")
         this.videoSphere.components.material.data.src = `#${targetEl.id}`
+        this.videoSphere.components.material.material.map.image.play();
         console.log(this.videoSphere.components.material.data.src)
         console.log("target " + `#${targetEl.id}`)
       }
