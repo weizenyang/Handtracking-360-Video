@@ -26,7 +26,7 @@ AFRAME.registerComponent('event-manager', {
     onClick: function (evt) {
       console.log(evt.target)
       var targetEl = evt.target;
-      console.log(this.videoSphere.src)
+      console.log(this.videoSphere)
       if(this.videoSphere.src == `#${targetEl.id}`){
         this.videoSphere.src = ""
       } else {
