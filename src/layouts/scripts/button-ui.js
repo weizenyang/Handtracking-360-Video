@@ -100,8 +100,8 @@ AFRAME.registerComponent('button', {
     onHoverStarted: function () {
       var el = this.el;
       console.log("Hover Started")
+      console.log(el)
       // el.setAttribute('material', {color: 'green'});
-      el.emit('hover');
       el.querySelector(".border").object3D.visible = true;
     },
 
@@ -109,7 +109,7 @@ AFRAME.registerComponent('button', {
       var el = this.el;
       // el.setAttribute('material', {color: 'green'});
       console.log("Hover Ended")
-      el.emit('hover');
+      console.log(el)
         el.querySelector(".border").object3D.visible = false;
     },
   
