@@ -26,22 +26,13 @@ AFRAME.registerComponent('event-manager', {
     onClick: function (evt) {
       console.log(evt.target)
       var targetEl = evt.target;
-      console.log(this.videoSphere.components.material.data.src)
-      if(this.videoSphere.components.material.data.src == `#${targetEl.id}`){
-        console.log("clear")
-        // this.videoSphere.components.material.data.src = ""
-        document.querySelector(`sphere-${targetEl.id}`).object3D.scale = "0 0 0"
-        document.querySelector(`sphere-${targetEl.id}`).components.material.material.map.image.stop();
-      } else {
-        console.log("change id")
+      
         document.querySelectorAll("a-videosphere").forEach((e)=> {
           e.object3D.scale = "0 0 0"
           e.components.material.material.map.image.stop();
         })
         document.querySelector(`sphere-${targetEl.id}`).object3D.scale = "1 1 1"
         document.querySelector(`sphere-${targetEl.id}`).components.material.material.map.image.play();
-        console.log(this.videoSphere.components.material.data.src)
-        console.log("target " + `#${targetEl.id}`)
       }
       
       // if (targetEl === this.boxButtonEl ||
