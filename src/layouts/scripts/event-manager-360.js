@@ -26,13 +26,19 @@ AFRAME.registerComponent('event-manager', {
     onClick: function (evt) {
       console.log(evt.target)
       var targetEl = evt.target;
-
+        const container = document.querySelector("#sphere-container")
         document.querySelectorAll("a-videosphere").forEach((e)=> {
-          e.object3D.visible = "false"
-          e.components.material.material.map.image.pause();
+          // e.object3D.visible = "false"
+          // e.components.material.material.map.image.pause();
+          e.remove()
         })
-        document.querySelector(`#sphere-${targetEl.id}`).object3D.visible = "true"
-        document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.play();
+        const sphere = document.createElement("a-videosphere")
+        sphere.setAttribute("visible", "true")
+        sphere.setAttribute(`src`, `#${evt.target.id}`)
+        sphere.setAttribute(`autoplay`, ``)
+        container.appendChild(sphere)
+        // document.querySelector(`#sphere-${targetEl.id}`).object3D.visible = "true"
+        // document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.play();
         console.log("target " + `#${targetEl.id}`)
       
       
