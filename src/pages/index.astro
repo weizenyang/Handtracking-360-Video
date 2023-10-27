@@ -70,8 +70,8 @@ import Card from '../components/Card.astro';
             <a-entity class="video-selector" id="video-3" button="label: video-3" position="0.15 0 0"></a-entity>
             <a-entity class="video-selector" id="video-4" button="label: video-4; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
           </a-entity>
-          <a-entity hand-tracking-controls="hand: left" raycaster="showLine: true"></a-entity>
-          <a-entity hand-tracking-controls="hand: right" raycaster="showLine: true"></a-entity>
+          <a-entity hand-tracking-controls="hand: left"></a-entity>
+          <a-entity hand-tracking-controls="hand: right"></a-entity>
 
           <a-entity id="sphere-container">
             <a-videosphere
@@ -95,6 +95,7 @@ import Card from '../components/Card.astro';
 
         <a-camera
             user-height="0.5"
+            <a-entity raycaster="showLine: true"></a-entity>
             collider-check
         >
         

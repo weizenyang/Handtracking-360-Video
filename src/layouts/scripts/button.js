@@ -55,9 +55,11 @@ AFRAME.registerComponent('button', {
       this.el.addEventListener('pressedended', this.onPressedEnded);
       this.el.addEventListener('raycaster-intersected', (e)=>{
         this.intersected = true
+        this.stateChanged
       });
       this.el.addEventListener('raycaster-intersected-cleared', (e) => {
         this.intersected = false
+        this.stateChanged
         this.onPressedEnded
       });
     },
