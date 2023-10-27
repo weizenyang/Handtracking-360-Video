@@ -29,10 +29,10 @@ AFRAME.registerComponent('event-manager', {
 
         document.querySelectorAll("a-videosphere").forEach((e)=> {
           e.object3D.visible = "false"
-          e.components.material.material.map.image.stop();
+          e.components.material.material.map.image.pause();
         })
         document.querySelector(`#sphere-${targetEl.id}`).object3D.visible = "true"
-        document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.play();
+        document.querySelector(`#sphere-${targetEl.id}`).components.material.material.map.image.pause();
         console.log("target " + `#${targetEl.id}`)
       
       
