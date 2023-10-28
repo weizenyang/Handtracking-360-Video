@@ -19,11 +19,14 @@ AFRAME.registerComponent('pressable', {
       var distance;
       for (var i = 0; i < handEls.length; i++) {
         handEl = handEls[i];
-        
-        if(this.data.target == null){
+        // if(this.data.target == null){
+        if(this.data.target){
           distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
         } else {
-          distance = this.calculateFingerPlaneDistance(handEl.components['hand-tracking-controls'].indexTipPosition, this.el.querySelector(this.data.target).object3D.geometry)
+          console.log("tick")
+          console.log(this.el.querySelector(this.data.target).object3D)
+          //Needs work
+          // distance = this.calculateFingerPlaneDistance(handEl.components['hand-tracking-controls'].indexTipPosition, this.el.querySelector(this.data.target).getAttribute('geometry').normal)
         }
 
         if (distance <= this.data.pressDistance) {
@@ -61,12 +64,14 @@ AFRAME.registerComponent('pressable', {
     },
 
     calculateFingerPlaneDistance(point, plane) {
+      console.log("CFPD")
+      console.log(plane)
       var x_o = point.x;
       var y_o = point.y;
       var z_o = point.z;
-      var A = plane.normal.x;
-      var B = plane.normal.y;
-      var C = plane.normal.z;
+      var A = plane.x;
+      var B = plane.y;
+      var C = plane.z;
       var D = -plane.constant;
     
       return Math.abs(A * x_o + B * y_o + C * z_o + D) / Math.sqrt(A * A + B * B + C * C);
