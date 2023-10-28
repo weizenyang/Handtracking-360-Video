@@ -129,6 +129,7 @@ AFRAME.registerComponent('button', {
     },
   
     onPressedEnded: function () {
+      var el = this;
       if (this.el.is('pressed')) { return; }
       console.log("Press Ended")
       el.querySelector(".border").setAttribute("visible", "true")
