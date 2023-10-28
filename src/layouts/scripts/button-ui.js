@@ -110,13 +110,15 @@ AFRAME.registerComponent('button', {
       console.log("Hover Started")
       console.log(this)
       // el.setAttribute('material', {color: 'green'});
+      el.querySelector(".border").setAttribute("slice9", "opacity: 0.6")
       el.querySelector(".border").setAttribute("visible", "true")
     },
 
-    onHoverUpdated: function () {
+    onHoverUpdated: function (e) {
       var el = this;
       console.log("Hover Started")
       console.log(this)
+      console.log(e)
       // el.setAttribute('material', {color: 'green'});
       el.querySelector(".border").setAttribute("visible", "true")
     },
