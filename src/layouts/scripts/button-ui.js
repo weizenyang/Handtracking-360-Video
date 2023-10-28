@@ -91,6 +91,7 @@ AFRAME.registerComponent('button', {
     onPressedStarted: function () {
       var el = this.el;
       console.log("Press Started")
+      el.querySelector(".border").setAttribute("visible", "true")
       // el.setAttribute('material', {color: 'green'});
       el.emit('click');
       if (this.data.togabble) {
