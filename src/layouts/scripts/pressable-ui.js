@@ -42,13 +42,15 @@ AFRAME.registerComponent('pressable', {
           this.hovered = true;
         } else {
           if (this.hovered) { this.el.emit('hoverended') }
+          if (this.pressed) { this.el.emit('pressedended') }
           this.hovered = false;
+          this.pressed = false;
         }
         
       }
-      if (this.pressed) { this.el.emit('pressedended') }
+      
       // if (this.hovered) { this.el.emit('hoverended') }
-      this.pressed = false;
+      
       
     },
   
