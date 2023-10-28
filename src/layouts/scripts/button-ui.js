@@ -155,7 +155,7 @@ AFRAME.registerComponent('button', {
     }, 
     tick(){
       var el = this.el;
-      if(this.thickness != this.currentThickness && this.currentFade != this.fade){
+      
         console.log(this.currentState)
       if(this.currentState == this.states.NONE){
         console.log("NONE")
@@ -170,6 +170,7 @@ AFRAME.registerComponent('button', {
         this.thickness = 0.35
         this.fade = 0.01
       }
+      if(this.thickness != this.currentThickness && this.currentFade != this.fade){
       this.currentThickness += (this.thickness - this.currentThickness) * 0.05
       this.currentFade += (this.fade - this.currentFade) * 0.05
       if(el.querySelector(".border")){
