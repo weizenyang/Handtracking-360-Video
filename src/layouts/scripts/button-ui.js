@@ -93,7 +93,7 @@ AFRAME.registerComponent('button', {
       // console.log("Press Started")
       el.querySelector(".border").setAttribute("visible", "true")
       el.querySelector(".border").setAttribute("slice9", "opacity: 1.0")
-      el.querySelector(".background").setAttribute("slice9", "opacity: 0.85")
+      el.querySelector(".background").setAttribute("slice9", "opacity: 1.0")
       // el.setAttribute('material', {color: 'green'});
       el.emit('click');
       if (this.data.togabble) {

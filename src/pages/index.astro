@@ -63,12 +63,12 @@ import Card from '../components/Card.astro';
         percent="0.29"
         margin="0 0 0.05 0">
         <a-gui-button> -->
-            <a-entity position="0 0.7 -0.5">
-                <a-entity id="video-3" class="video-selector collidable ui" button="label: Video 1" position="0.35 0 0">
+            <a-entity position="0 1.2 -0.5">
+                <a-entity id="video-1" class="video-selector collidable ui" button="label: Video 1" position="0.35 0 0">
                     <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane>
                     <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
                 </a-entity>
-                <a-entity id="video-3" class="video-selector collidable ui" button="label: Video 2" position="0 0 0">
+                <a-entity id="video-2" class="video-selector collidable ui" button="label: Video 2" position="0 0 0">
                     <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane>
                     <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
                 </a-entity>
@@ -110,6 +110,7 @@ import Card from '../components/Card.astro';
             </a-videosphere>
           </a-entity>
         
+          
 
         <!-- <a-videosphere
             rotation="0 180 0"
@@ -130,8 +131,11 @@ import Card from '../components/Card.astro';
 </Layout>
 		
 <script>
+    // setTimeout((e) => {
+    //     var shortevent = document.createEvent("click");
+	//     document.querySelector("[button=label: Video 2]").dispatchEvent(shortevent)
+    // }, 3000)
     
-	
     // document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
     // document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
     
