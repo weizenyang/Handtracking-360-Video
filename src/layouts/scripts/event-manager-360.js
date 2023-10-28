@@ -33,7 +33,6 @@ AFRAME.registerComponent('event-manager', {
           e.components.material.material.map.image.pause();
           e.remove()
         })
-        console.log(evt.target.id.includes("video"))
         if(evt.target.id.includes("video")){
           const sphere = document.createElement("a-videosphere")
           sphere.setAttribute("visible", "true")
