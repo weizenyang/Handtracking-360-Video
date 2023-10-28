@@ -63,18 +63,22 @@ import Card from '../components/Card.astro';
         percent="0.29"
         margin="0 0 0.05 0">
         <a-gui-button> -->
-            <a-entity position="0 1.5 -0.5">
-                <a-entity id="video-3" class="collidable ui" button="label: Video 1" position="0.35 0 0">
+            <a-entity position="0 0.7 -0.5">
+                <a-entity id="video-3" class="video-selector collidable ui" button="label: Video 1" position="0.35 0 0">
                     <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane>
                     <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
                 </a-entity>
-                <a-entity id="video-3" class="collidable ui" button="label: Video 2" position="0 0 0">
+                <a-entity id="video-3" class="video-selector collidable ui" button="label: Video 2" position="0 0 0">
                     <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane>
                     <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
                 </a-entity>
-                <a-entity id="video-3" class="collidable ui" button="label: Video 3" position="-0.35 0 0">
+                <a-entity id="video-3" class="video-selector collidable ui" button="label: Video 3" position="-0.35 0 0">
                     <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane>
                     <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
+                </a-entity>
+                <a-entity id="clear" class="video-selector collidable ui" button="label: < Back" position="0 -0.25 0">
+                    <a-plane class="background" width="1" height="0.25" slice9="width: 0.625; height: 0.15; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane>
+                    <a-entity class="border" width="1" height="0.25" slice9="width: 0.625; height: 0.15; left:270; right: 130; top: 270; bottom: 130; side: front; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
                 </a-entity>
             </a-entity>
             
@@ -86,13 +90,13 @@ import Card from '../components/Card.astro';
         </a-gui-slider> -->
         
 
-        <a-entity id="menu" menu position="0 1.0 -0.5" rotation="-45 0 0" event-manager>
+        <!-- <a-entity id="menu" menu position="0 1.0 -0.5" rotation="-45 0 0" event-manager> -->
             <!-- <a-entity slider position="0 0.10 0"></a-entity> -->
             <!-- <a-entity class="video-selector" id="video-1" button="label: video-1; " position="-0.15 0 0"></a-entity>
             <a-entity class="video-selector" id="video-2" button="label: video-2" position="0 0 0"></a-entity>
             <a-entity class="video-selector" id="video-3" button="label: video-3" position="0.15 0 0"></a-entity> -->
             <!-- <a-entity id="clear" button="label: Clear; width: 0.20;" position="0 -0.10 0"></a-entity> -->
-          </a-entity>
+        <!-- </a-entity> -->
           <a-entity hand-tracking-controls="hand: left"></a-entity>
           <a-entity hand-tracking-controls="hand: right"></a-entity>
 

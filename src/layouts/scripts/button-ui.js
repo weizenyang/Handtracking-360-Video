@@ -90,7 +90,7 @@ AFRAME.registerComponent('button', {
   
     onPressedStarted: function () {
       var el = this.el;
-      console.log("Press Started")
+      // console.log("Press Started")
       el.querySelector(".border").setAttribute("visible", "true")
       el.querySelector(".border").setAttribute("slice9", "opacity: 1.0")
       el.querySelector(".background").setAttribute("slice9", "opacity: 0.85")
@@ -107,8 +107,8 @@ AFRAME.registerComponent('button', {
 
     onHoverStarted: function () {
       var el = this;
-      console.log("Hover Started")
-      console.log(this)
+      // console.log("Hover Started")
+      // console.log(this)
       // el.setAttribute('material', {color: 'green'});
       el.querySelector(".border").setAttribute("slice9", "opacity: 0.6")
       el.querySelector(".border").setAttribute("visible", "true")
@@ -116,9 +116,9 @@ AFRAME.registerComponent('button', {
 
     onHoverUpdated: function (e) {
       var el = this;
-      console.log("Hover Started")
-      console.log(this)
-      console.log(e)
+      // console.log("Hover Started")
+      // console.log(this)
+      // console.log(e)
       // el.setAttribute('material', {color: 'green'});
       el.querySelector(".border").setAttribute("visible", "true")
     },
@@ -126,7 +126,7 @@ AFRAME.registerComponent('button', {
     onHoverEnded: function () {
       var el = this;
       // el.setAttribute('material', {color: 'green'});
-      console.log("Hover Ended")
+      // console.log("Hover Ended")
       console.log(this)
       el.querySelector(".border").setAttribute("visible", "false")
     },
@@ -135,7 +135,7 @@ AFRAME.registerComponent('button', {
       var el = this.el;
       
       if (this.el.is('pressed')) { return; }
-      console.log("Press Ended")
+      // console.log("Press Ended")
       // el.querySelector(".border").setAttribute("slice9", "opacity: 0.0")
       el.querySelector(".background").setAttribute("slice9", "opacity: 0.50")
       this.el.setAttribute('material', {color: this.color});
