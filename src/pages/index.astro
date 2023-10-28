@@ -6,7 +6,7 @@ import Card from '../components/Card.astro';
 
 <Layout title='hand-tracking'>
     
-    <a-scene renderer="antialias: true; colorManagement: true">
+    <a-scene renderer="antialias: true; colorManagement: true; sortObjects: false">
         <a-assets>
             <!-- Single source video. -->
             <video
@@ -70,13 +70,13 @@ import Card from '../components/Card.astro';
                 
                 <a-entity id="video-1" class="video-selector collidable ui" button="label: Video 1" position="-0.35 0 0">
                     <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity>
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="color: #fff;thickness: 0.5; edge: 0.005; alpha: 1.0" position="0 0 1"></a-entity>
+                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="color: #fff;thickness: 0.5; edge: 0.005; alpha: 1.0" position="0 0 0.001"></a-entity>
                     <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
                     <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
                 </a-entity>
                 <a-entity id="video-2" class="video-selector collidable ui" button="label: Video 2" position="0 0 0">
                     <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity>
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="color: #fff; thickness: 0.5; edge: 0.005; alpha: 1.0" position="0 0 1"></a-entity>
+                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="color: #fff; thickness: 0.5; edge: 0.005; alpha: 1.0" position="0 0 0.001"></a-entity>
                     <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
                     <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
                 </a-entity>

@@ -61,20 +61,24 @@ AFRAME.registerComponent('outline-material', {
                   float dist = udRoundBoxBorder(curPosition - boxPosition, boxSize, boxRounding, 0.6);    
                   float THRESHOLD = 0.0001;
                   if (dist <= THRESHOLD){
-                    //   gl_FragColor.rgb = vec3(1.0, 1.0, 1.0);
+                      gl_FragColor.rgb = vec3(1.0, 1.0, 1.0);
+                      
                     // Anti-aliasing
-                    float aaFactor = smoothstep(THRESHOLD - edge, THRESHOLD + edge, dist);
-                    gl_FragColor.rgba = mix(vec4(vec3(color), alpha), vec4(0), aaFactor);
-                    if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b < 0.5) {
-                        discard;
-                      }
+                    // float aaFactor = smoothstep(THRESHOLD - edge, THRESHOLD + edge, dist);
+                    // gl_FragColor.rgba = mix(vec4(0), vec4(vec3(1.0, 1.0, 1.0), 1.0), aaFactor);
+                    // if (gl_FragColor.a < 0.1) {
+                    //     discard;
+                    //   }
                   }
+                  if (gl_FragColor.rgb == vec3(0.0, 0.0, 0.0)) {
+                    discard;
+                 }
               }
             `
         });
 
         // material.transparent = true;
-        // // material.opacity= 0.5
+        // material.opacity= 0.5
         // material.depthWrite = false; // Disable depth writing
         // material.depthTest = true; // Enable depth testing
         // el.object3D.renderOrder = 0
