@@ -154,15 +154,19 @@ AFRAME.registerComponent('button', {
       this.el.setAttribute('material', {color: this.color});
     }, 
     tick(){
+      var el = this.el;
       if(this.thickness != this.currentThickness && this.currentFade != this.fade){
-        var el = this.el;
+        console.log(this.currentState)
       if(this.currentState == this.states.NONE){
+        console.log("NONE")
         this.thickness = 0.0
         this.fade = 0.0
       } else if(this.currentState == this.states.HOVER){
+        console.log("HOVER")
         this.thickness = 0.35
         this.fade = 0.15
       } else if(this.currentState == this.states.PRESSED){
+        console.log("PRESSED")
         this.thickness = 0.35
         this.fade = 0.01
       }
