@@ -118,6 +118,7 @@ AFRAME.registerComponent('button', {
 
     onHoverStarted: function () {
       var el = this;
+      console.log('hover')
       // console.log("Hover Started")
       // console.log(this)
       // el.setAttribute('material', {color: 'green'});
@@ -130,7 +131,7 @@ AFRAME.registerComponent('button', {
       var el = this;
       // console.log("Hover Started")
       // console.log(this)
-      // console.log(e)
+      console.log(e)
       // el.setAttribute('material', {color: 'green'});
       // el.querySelector(".border").setAttribute("visible", "true")
     },
@@ -162,11 +163,11 @@ AFRAME.registerComponent('button', {
         this.thickness = 0.0
         this.fade = 0.0
       } else if(this.currentState == "hover"){
-        console.log("HOVER")
+        // console.log("HOVER")
         this.thickness = 0.35
         this.fade = 0.15
-      } else if(this.currentState == "hover"){
-        console.log("PRESSED")
+      } else if(this.currentState == "pressed"){
+        // console.log("PRESSED")
         this.thickness = 0.35
         this.fade = 0.01
       }

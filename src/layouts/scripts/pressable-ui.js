@@ -33,10 +33,10 @@ AFRAME.registerComponent('pressable', {
           if (!this.pressed) { this.el.emit('pressedstarted'); }
           this.pressed = true;
           this.hovered = false;
-          return;
         } else if(distance < this.data.hoverDistance && distance > this.data.pressDistance){
-          if (!this.hovered) { this.el.emit('hoverstarted') } 
-          else {
+          if (!this.hovered) {
+             this.el.emit('hoverstarted') 
+            } else {
             this.el.emit('hoverupdate', {"distance": distance});
           }
           this.hovered = true;
