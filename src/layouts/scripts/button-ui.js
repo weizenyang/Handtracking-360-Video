@@ -92,6 +92,7 @@ AFRAME.registerComponent('button', {
       var el = this.el;
       console.log("Press Started")
       el.querySelector(".border").setAttribute("visible", "true")
+      el.querySelector(".border").setAttribute("slice9", "opacity: 1.0")
       el.querySelector(".background").setAttribute("slice9", "opacity: 0.85")
       // el.setAttribute('material', {color: 'green'});
       el.emit('click');
@@ -129,11 +130,11 @@ AFRAME.registerComponent('button', {
     },
   
     onPressedEnded: function () {
-      var el = this;
-      console.log(el)
+      var el = this.el;
+      
       if (this.el.is('pressed')) { return; }
       console.log("Press Ended")
-      el.querySelector(".border").setAttribute("visible", "true")
+      // el.querySelector(".border").setAttribute("slice9", "opacity: 0.0")
       el.querySelector(".background").setAttribute("slice9", "opacity: 0.50")
       this.el.setAttribute('material', {color: this.color});
     }, 
