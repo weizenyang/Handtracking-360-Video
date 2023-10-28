@@ -90,7 +90,7 @@ AFRAME.registerComponent('button', {
   
     onPressedStarted: function () {
       var el = this.el;
-      // console.log("Press Started")
+      console.log("Press Started")
       el.querySelector(".border").setAttribute("visible", "true")
       el.querySelector(".border").setAttribute("slice9", "opacity: 1.0")
       el.querySelector(".background").setAttribute("slice9", "opacity: 1.0")
