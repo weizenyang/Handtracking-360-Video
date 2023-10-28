@@ -19,7 +19,7 @@ AFRAME.registerComponent('button', {
       // });
   
       // el.setAttribute('material', {color: this.color});
-      el.setAttribute('pressable', '');
+      el.setAttribute('pressable', 'target: .background');
   
       labelEl.setAttribute('position', '0 0 0.02');
       labelEl.setAttribute('text', {

@@ -2,7 +2,8 @@
 AFRAME.registerComponent('pressable', {
     schema: {
       pressDistance: { default: 0.06 },
-      hoverDistance: { default: 0.16}
+      hoverDistance: { default: 0.16},
+      target: {default: null}
     },
   
     init: function () {
@@ -18,8 +19,13 @@ AFRAME.registerComponent('pressable', {
       var distance;
       for (var i = 0; i < handEls.length; i++) {
         handEl = handEls[i];
-        distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
-        console.log(distance)
+        
+        if(target == null){
+          distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
+        } else {
+          distance = this.calculateFingerPlaneDistance(handEl.components['hand-tracking-controls'].indexTipPosition, this.el.querySelector(this.data.target).object3D.geometry)
+        }
+
         if (distance <= this.data.pressDistance) {
           if (!this.pressed) { this.el.emit('pressedstarted'); }
           this.pressed = true;
@@ -35,6 +41,7 @@ AFRAME.registerComponent('pressable', {
           if (this.hovered) { this.el.emit('hoverended') }
           this.hovered = false;
         }
+        
       }
       if (this.pressed) { this.el.emit('pressedended') }
       // if (this.hovered) { this.el.emit('hoverended') }
@@ -51,5 +58,17 @@ AFRAME.registerComponent('pressable', {
       el.object3D.parent.localToWorld(worldPosition);
   
       return worldPosition.distanceTo(fingerPosition);
+    },
+
+    calculateFingerPlaneDistance(point, plane) {
+      var x_o = point.x;
+      var y_o = point.y;
+      var z_o = point.z;
+      var A = plane.normal.x;
+      var B = plane.normal.y;
+      var C = plane.normal.z;
+      var D = -plane.constant;
+    
+      return Math.abs(A * x_o + B * y_o + C * z_o + D) / Math.sqrt(A * A + B * B + C * C);
     }
   });
