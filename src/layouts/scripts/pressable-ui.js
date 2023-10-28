@@ -20,7 +20,7 @@ AFRAME.registerComponent('pressable', {
       for (var i = 0; i < handEls.length; i++) {
         handEl = handEls[i];
         
-        if(target == null){
+        if(this.data.target == null){
           distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
         } else {
           distance = this.calculateFingerPlaneDistance(handEl.components['hand-tracking-controls'].indexTipPosition, this.el.querySelector(this.data.target).object3D.geometry)
