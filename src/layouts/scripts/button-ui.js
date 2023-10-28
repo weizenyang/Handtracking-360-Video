@@ -11,6 +11,17 @@ AFRAME.registerComponent('button', {
       this.triggerdown = false
       this.intersected = false
       this.color = '#3a50c5';
+      this.states = {
+        HOVER: "hover",
+        PRESSED: "pressed",
+        NONE: "none"
+      }
+      this.currentState = this.states.NONE
+      this.thickness = 0.0
+      this.fade = 0.0
+      this.currentThickness = 0.0
+      this.currentFade = 0.0
+      
       // el.setAttribute('geometry', {
       //   primitive: 'box',
       //   width: this.data.width,
@@ -91,9 +102,9 @@ AFRAME.registerComponent('button', {
     onPressedStarted: function () {
       var el = this.el;
       console.log("Press Started")
-      el.querySelector(".border").setAttribute("visible", "true")
-      el.querySelector(".border").setAttribute("slice9", "opacity: 1.0")
-      el.querySelector(".background").setAttribute("slice9", "opacity: 1.0")
+      this.currentState = this.states.PRESSED;
+      // el.querySelector(".border").setAttribute("visible", "true")
+      // el.querySelector(".border").setAttribute(`outline-material`, `thickness: ${currentThickness}; edge: 0.01`)
       // el.setAttribute('material', {color: 'green'});
       el.emit('click');
       if (this.data.togabble) {
@@ -110,8 +121,9 @@ AFRAME.registerComponent('button', {
       // console.log("Hover Started")
       // console.log(this)
       // el.setAttribute('material', {color: 'green'});
-      el.querySelector(".border").setAttribute("slice9", "opacity: 0.6")
-      el.querySelector(".border").setAttribute("visible", "true")
+      // el.querySelector(".border").setAttribute("outline-material", "thickness: 0.35; edge: 0.15")
+      // el.querySelector(".border").setAttribute("visible", "true")
+      this.currentState = this.states.HOVER;
     },
 
     onHoverUpdated: function (e) {
@@ -120,7 +132,7 @@ AFRAME.registerComponent('button', {
       // console.log(this)
       // console.log(e)
       // el.setAttribute('material', {color: 'green'});
-      el.querySelector(".border").setAttribute("visible", "true")
+      // el.querySelector(".border").setAttribute("visible", "true")
     },
 
     onHoverEnded: function () {
@@ -128,7 +140,7 @@ AFRAME.registerComponent('button', {
       // el.setAttribute('material', {color: 'green'});
       // console.log("Hover Ended")
       // console.log(this)
-      el.querySelector(".border").setAttribute("visible", "false")
+      this.currentState = this.states.NONE;
     },
   
     onPressedEnded: function () {
@@ -137,10 +149,36 @@ AFRAME.registerComponent('button', {
       if (this.el.is('pressed')) { return; }
       // console.log("Press Ended")
       // el.querySelector(".border").setAttribute("slice9", "opacity: 0.0")
-      el.querySelector(".background").setAttribute("slice9", "opacity: 0.50")
+      // el.querySelector(".background").setAttribute("slice9", "opacity: 0.50")
+      this.currentState = this.states.NONE;
       this.el.setAttribute('material', {color: this.color});
     }, 
     tick(){
+      if(this.thickness != this.currentThickness && this.currentFade != this.fade){
+        var el = this.el;
+      if(this.currentState == this.states.NONE){
+        this.thickness = 0.0
+        this.fade = 0.0
+      } else if(this.currentState == this.states.HOVER){
+        this.thickness = 0.35
+        this.fade = 0.15
+      } else if(this.currentState == this.states.PRESSED){
+        this.thickness = 0.35
+        this.fade = 0.01
+      }
+      this.currentThickness += (this.thickness - this.currentThickness) * 0.05
+      this.currentFade += (this.fade - this.currentFade) * 0.05
+      if(el.querySelector(".border")){
+        this.att = el.querySelector(".border").getAttribute(`outline-material`)
+        console.log(this.att)
+        // el.querySelector(".border").setAttribute(`outline-material`, `thickness`, this.currentThickness)
+        el.querySelector(".border").setAttribute(`outline-material`, `thickness: ${this.currentThickness}; edge: ${this.currentFade};`)
+        console.log(this.currentThickness)
+      }
+      }
+      
       
     }
+
+    
   });

@@ -37,12 +37,12 @@ import Card from '../components/Card.astro';
                     src="/sagia_scene_setter.mp4"
                 />
             </video>
-            <a-asset-item id="preview-plane" src="/preview-plane.glb">
-                
-            </a-asset-item>
+            <a-asset-item id="preview-plane" src="/preview-plane.glb"></a-asset-item>
 
             <image id="ui-backplate" src="/UI-Backplate.png"></image>
             <image id="ui-backplate" src="/UI-Border.png"></image>
+            <image id="neom-image" src="/Neom.png"/>
+            <image id="sagia-image" src="/Sagia.png"/>
         </a-assets>
         
         <!-- <a-entity id="leftHand"  hand-tracking-controls="hand: left; modelColor:#555555">
@@ -68,22 +68,22 @@ import Card from '../components/Card.astro';
         <a-gui-button> -->
             <a-entity position="0 1.2 -0.5" event-manager>
                 
-                <a-entity id="video-1" class="video-selector collidable ui" button="label: Video 1" position="-0.35 0 0">
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity>
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="color: #fff;thickness: 0.5; edge: 0.005; alpha: 1.0" position="0 0 0.001"></a-entity>
+                <a-entity id="video-1" class="video-selector collidable ui" button="label: Sagia" position="-0.35 0 0">
+                    <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
+                    <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Neom.png; color: #fff; thickness: 0.0; edge: 0.0; alpha: 0.2" position="0 0 0.001"></a-entity>
                     <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
                     <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
                 </a-entity>
-                <a-entity id="video-2" class="video-selector collidable ui" button="label: Video 2" position="0 0 0">
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity>
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="color: #fff; thickness: 0.5; edge: 0.005; alpha: 1.0" position="0 0 0.001"></a-entity>
+                <a-entity id="video-2" class="video-selector collidable ui" button="label: Neom" position="0 0 0">
+                    <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
+                    <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Sagia.png; color: #fff; thickness: 0.0; edge: 0.0; alpha: 0.2" position="0 0 0.001"></a-entity>
                     <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
                     <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
                 </a-entity>
                 <a-entity id="none" class="video-selector collidable ui" button="label: (Video 3) Soon" position="0.35 0 0">
                     <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity>
                     <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                    <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
+                    <a-entity width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
                 </a-entity>
                 <a-entity id="clear" class="video-selector collidable ui" button="label: < Back" position="0 -0.25 0">
                     <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity>
@@ -141,10 +141,17 @@ import Card from '../components/Card.astro';
 </Layout>
 		
 <script>
-    // setTimeout((e) => {
-    //     var shortevent = document.createEvent("click");
-	//     document.querySelector("[button=label: Video 2]").dispatchEvent(shortevent)
-    // }, 3000)
+    // setInterval((e) => {
+    //     document.querySelectorAll(".border").forEach((i) => {
+    //         console.log("set")
+    //         const map = i.getAttribute('outline-material')
+    //         var thickness = map.thickness
+    //         var fade = map.edge
+    //         thickness -= 0.05
+    //         fade -= 0.05
+    //         i.setAttribute(`outline-material`, `thickness: ${thickness}; edge: ${fade}`)
+    //     })
+    // }, 10000)
     
     // document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
     // document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
