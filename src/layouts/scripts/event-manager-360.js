@@ -24,7 +24,7 @@ AFRAME.registerComponent('event-manager', {
     },
   
     onClick: function (evt) {
-      console.log(evt.target)
+      // console.log(evt.target)
       var targetEl = evt.target;
         const container = document.querySelector("#sphere-container")
         document.querySelectorAll("a-videosphere").forEach((e)=> {

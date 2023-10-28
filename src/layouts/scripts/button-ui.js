@@ -127,7 +127,7 @@ AFRAME.registerComponent('button', {
       var el = this;
       // el.setAttribute('material', {color: 'green'});
       // console.log("Hover Ended")
-      console.log(this)
+      // console.log(this)
       el.querySelector(".border").setAttribute("visible", "false")
     },
   
