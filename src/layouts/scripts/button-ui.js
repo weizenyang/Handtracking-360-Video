@@ -164,16 +164,16 @@ AFRAME.registerComponent('button', {
         this.fade = 0.0
       } else if(this.currentState == "hover"){
         // console.log("HOVER")
-        this.thickness = 0.45
-        this.fade = 0.15
+        this.thickness = 0.55
+        this.fade = 0.07
       } else if(this.currentState == "pressed"){
         // console.log("PRESSED")
         this.thickness = 0.45
         this.fade = 0.01
       }
       if(this.thickness != this.currentThickness && this.currentFade != this.fade){
-      this.currentThickness += (this.thickness - this.currentThickness) * 0.1
-      this.currentFade += (this.fade - this.currentFade) * 0.1
+      this.currentThickness += (this.thickness - this.currentThickness) * 0.5
+      this.currentFade += (this.fade - this.currentFade) * 0.5
       if(el.querySelector(".border")){
         this.att = el.querySelector(".border").getAttribute(`outline-material`)
         console.log(this.att)
