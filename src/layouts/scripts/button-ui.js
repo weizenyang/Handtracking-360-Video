@@ -157,15 +157,15 @@ AFRAME.registerComponent('button', {
       var el = this.el;
       
         console.log(this.currentState)
-      if(this.currentState == this.states.NONE){
-        console.log("NONE")
+      if(this.currentState == "none"){
+        
         this.thickness = 0.0
         this.fade = 0.0
-      } else if(this.currentState == this.states.HOVER){
+      } else if(this.currentState == "hover"){
         console.log("HOVER")
         this.thickness = 0.35
         this.fade = 0.15
-      } else if(this.currentState == this.states.PRESSED){
+      } else if(this.currentState == "hover"){
         console.log("PRESSED")
         this.thickness = 0.35
         this.fade = 0.01
