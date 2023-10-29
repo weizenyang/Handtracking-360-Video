@@ -16,12 +16,13 @@ AFRAME.registerComponent('button', {
         PRESSED: "pressed",
         NONE: "none"
       }
-      this.currentState = this.states.NONE
+      this.currentState = null
       this.thickness = 0.0
       this.fade = 0.0
       this.currentThickness = 0.0
       this.currentFade = 0.0
       
+      this.currentState
       // el.setAttribute('geometry', {
       //   primitive: 'box',
       //   width: this.data.width,
@@ -102,7 +103,9 @@ AFRAME.registerComponent('button', {
     onPressedStarted: function () {
       var el = this.el;
       console.log("Press Started")
-      this.currentState = this.states.PRESSED;
+      // this.currentState = this.states.PRESSED;
+      this.thickness = 0.45
+      this.fade = 0.01
       // el.querySelector(".border").setAttribute("visible", "true")
       // el.querySelector(".border").setAttribute(`outline-material`, `thickness: ${currentThickness}; edge: 0.01`)
       // el.setAttribute('material', {color: 'green'});
@@ -118,13 +121,14 @@ AFRAME.registerComponent('button', {
 
     onHoverStarted: function () {
       var el = this;
-      console.log('hover')
       // console.log("Hover Started")
       // console.log(this)
       // el.setAttribute('material', {color: 'green'});
       // el.querySelector(".border").setAttribute("outline-material", "thickness: 0.35; edge: 0.15")
       // el.querySelector(".border").setAttribute("visible", "true")
-      this.currentState = this.states.HOVER;
+      this.thickness = 0.55
+      this.fade = 0.01
+      // this.currentState = this.states.HOVER;
     },
 
     onHoverUpdated: function (e) {
@@ -141,7 +145,9 @@ AFRAME.registerComponent('button', {
       // el.setAttribute('material', {color: 'green'});
       console.log("Hover Ended")
       // console.log(this)
-      this.currentState = this.states.NONE;
+      // this.currentState = this.states.NONE;
+      this.thickness = 0.0
+        this.fade = 0.0
     },
   
     onPressedEnded: function () {
@@ -151,25 +157,27 @@ AFRAME.registerComponent('button', {
       // console.log("Press Ended")
       // el.querySelector(".border").setAttribute("slice9", "opacity: 0.0")
       // el.querySelector(".background").setAttribute("slice9", "opacity: 0.50")
-      this.currentState = this.states.NONE;
+      // this.currentState = this.states.NONE;
+      this.thickness = 0.0
+      this.fade = 0.0
       this.el.setAttribute('material', {color: this.color});
     }, 
     tick(){
       var el = this.el;
       
-        console.log(this.currentState)
-      if(this.currentState == "none"){
-        this.thickness = 0.0
-        this.fade = 0.0
-      } else if(this.currentState == "hover"){
-        console.log("HOVER")
-        this.thickness = 0.55
-        this.fade = 0.01
-      } else if(this.currentState == "pressed"){
-        // console.log("PRESSED")
-        this.thickness = 0.45
-        this.fade = 0.01
-      }
+      //   console.log(this.currentState)
+      // if(this.currentState == "none"){
+      //   this.thickness = 0.0
+      //   this.fade = 0.0
+      // } else if(this.currentState == "hover"){
+      //   console.log("HOVER")
+      //   this.thickness = 0.55
+      //   this.fade = 0.01
+      // } else if(this.currentState == "pressed"){
+      //   // console.log("PRESSED")
+      //   this.thickness = 0.45
+      //   this.fade = 0.01
+      // }
       if(this.thickness != this.currentThickness && this.currentFade != this.fade){
       this.currentThickness += (this.thickness - this.currentThickness) * 0.5
       this.currentFade += (this.fade - this.currentFade) * 0.5
