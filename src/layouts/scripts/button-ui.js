@@ -87,6 +87,8 @@ AFRAME.registerComponent('button', {
       this.stateChanged = this.stateChanged.bind(this);
       this.onPressedStarted = this.onPressedStarted.bind(this);
       this.onPressedEnded = this.onPressedEnded.bind(this);
+      this.onHoverStarted = this.onHoverStarted.bind(this);
+      this.onHoverEnded = this.onHoverEnded.bind(this);
     },
   
     update: function (oldData) {
@@ -154,7 +156,7 @@ AFRAME.registerComponent('button', {
       var el = this.el;
       
       if (this.el.is('pressed')) { return; }
-      // console.log("Press Ended")
+      console.log("Press Ended")
       // el.querySelector(".border").setAttribute("slice9", "opacity: 0.0")
       // el.querySelector(".background").setAttribute("slice9", "opacity: 0.50")
       // this.currentState = this.states.NONE;
