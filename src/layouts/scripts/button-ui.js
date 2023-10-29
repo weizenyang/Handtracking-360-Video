@@ -181,7 +181,7 @@ AFRAME.registerComponent('button', {
       //   this.fade = 0.01
       // }
       console.log(`Target ${this.thickness} ${this.fade}`)
-      if(Math.abs(this.thickness - this.currentThickness) > 0.001 && Math.abs(this.currentFade - this.fade) > 0.001 ){
+      if(Math.abs(this.thickness - this.currentThickness) > 0.001 || Math.abs(this.currentFade - this.fade) > 0.001 ){
       this.currentThickness += (this.thickness - this.currentThickness) * 0.5
       this.currentFade += (this.fade - this.currentFade) * 0.5
       if(el.querySelector(".border")){
