@@ -39,6 +39,25 @@ AFRAME.registerComponent('button', {
         color: 'white',
         align: 'center'
       });
+
+      // this.hoverSound = document.createElement('a-sound');
+      // this.hoverSound.setAttribute("src","src: url(/Hover.mp3)")
+      // console.log(this.hoverSound.src)
+      // el.appendChild(this.hoverSound)
+      
+      
+      
+      // this.pressStartSound = document.createElement('a-sound');
+      // this.pressStartSound.setAttribute("src","src: url(/PressStart.mp3)")
+      // this.pressStartSound.setAttribute("volume","1")
+      // el.appendChild(this.pressStartSound)
+
+      // this.pressEndSound = document.createElement('a-sound');
+      // this.pressEndSound.setAttribute("src","src: url(/PressEnd.mp3)")
+      // el.appendChild(this.pressEndSound)
+      // <a-sound src="src: url(/Hover.mp3)" autoplay="true" position="0 2 5"></a-sound>
+
+      
   
       labelEl.setAttribute('scale', '0.75 0.75 0.75');
       this.el.appendChild(labelEl);
@@ -108,9 +127,21 @@ AFRAME.registerComponent('button', {
       // this.currentState = this.states.PRESSED;
       this.thickness = 0.50
       this.fade = 0.01
+      if(this.el.hasAttribute('sound')){
+        this.el.removeAttribute('sound')
+      }
+      el.setAttribute('sound', 'src: #pressStart; autoplay: true; volume: 3')
+
+      if(this.el.id == "hide-menu"){
+        document.getElementById('menu').setAttribute('animation', 'property: scale; from: 0 0 0; to: 1 1 1;')
+        
+      }
       // el.querySelector(".border").setAttribute("visible", "true")
       // el.querySelector(".border").setAttribute(`outline-material`, `thickness: ${currentThickness}; edge: 0.01`)
       // el.setAttribute('material', {color: 'green'});
+      // this.hoverSound.components.sound.stopSound();
+      // this.playStartSound.components.sound.playSound();
+      // this.playEndSound.components.sound.stopSound();
       el.emit('click');
       if (this.data.togabble) {
         if (el.is('pressed')) {
@@ -123,11 +154,17 @@ AFRAME.registerComponent('button', {
 
     onHoverStarted: function () {
       var el = this;
-      // console.log("Hover Started")
+      console.log("Hover Started")
       // console.log(this)
       // el.setAttribute('material', {color: 'green'});
       // el.querySelector(".border").setAttribute("outline-material", "thickness: 0.35; edge: 0.15")
       // el.querySelector(".border").setAttribute("visible", "true")
+      if(this.el.hasAttribute('sound')){
+        this.el.removeAttribute('sound')
+      }
+
+      
+      this.el.setAttribute('sound', 'src: #hover; autoplay: true; volume: 3')
       this.thickness = 0.45
       this.fade = 0.01
       // this.currentState = this.states.HOVER;
@@ -149,7 +186,7 @@ AFRAME.registerComponent('button', {
       // console.log(this)
       // this.currentState = this.states.NONE;
       this.thickness = 0.0
-        this.fade = 0.0
+      this.fade = 0.0
     },
   
     onPressedEnded: function () {
@@ -157,6 +194,19 @@ AFRAME.registerComponent('button', {
       
       if (this.el.is('pressed')) { return; }
       console.log("Press Ended")
+      if(this.el.hasAttribute('sound')){
+        this.el.removeAttribute('sound')
+      }
+      if(this.el.id == "hide-menu"){
+        this.el.setAttribute('animation', 'property: scale; from: 1 1 1; to: 0 0 0;')
+        document.getElementById('hide-menu').setAttribute('animation__2', 'property: position; from: 0.035 -0.2 -0.6; to: 0.035 -0.5 -0.6;')
+      }
+      
+      
+      el.setAttribute('sound', 'src: #pressEnd; autoplay: true; volume: 3')
+      // this.hoverSound.components.sound.stopSound();
+      // this.playStartSound.components.sound.stopSound();
+      // this.playEndSound.components.sound.playSound();
       // el.querySelector(".border").setAttribute("slice9", "opacity: 0.0")
       // el.querySelector(".background").setAttribute("slice9", "opacity: 0.50")
       // this.currentState = this.states.NONE;

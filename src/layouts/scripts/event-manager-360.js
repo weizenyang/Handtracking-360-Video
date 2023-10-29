@@ -2,7 +2,8 @@
 AFRAME.registerComponent('event-manager', {
 
     init: function () {
-      this.bindMethods();
+      setTimeout((e) => {
+        this.bindMethods();
   
       this.videoSelector = document.querySelectorAll('.video-selector');
       this.videoSphere = document.querySelector("#videoSphere")
@@ -11,6 +12,8 @@ AFRAME.registerComponent('event-manager', {
       this.videoSelector.forEach((e) => {
         e.addEventListener('click', this.onClick);
       })
+      }, 3000)
+      
   
       // this.boxButtonEl.addEventListener('click', this.onClick);
       // this.sphereButtonEl.addEventListener('click', this.onClick);
@@ -38,6 +41,15 @@ AFRAME.registerComponent('event-manager', {
           sphere.setAttribute("visible", "true")
           sphere.setAttribute(`src`, `#${evt.target.id}`)
           sphere.setAttribute(`autoplay`, ``)
+          sphere.setAttribute('rotation',"0 270 0")
+
+          setTimeout((e) => {
+            document.getElementById('menu').setAttribute('animation', 'property: scale; from: 1 1 1; to: 0 0 0;')
+            document.getElementById('hide-menu').setAttribute('animation', 'property: scale; from: 0 0 0; to: 1 1 1;')
+            document.getElementById('hide-menu').setAttribute('animation__2', 'property: position; from: 0.035 -0.5 -0.6; to: 0.035 -0.2 -0.6;')
+            
+          }, 1500)
+          
           
           container.appendChild(sphere)
           setTimeout((e) => {

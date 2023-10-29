@@ -32,6 +32,7 @@ AFRAME.registerComponent('pressable', {
         if(distance <= this.data.pressDistance){
           if (!this.pressed[i]){
             this.el.emit('pressedstarted', {"hand": i});
+            this.pressed[i] = true;
           }
         } else if(distance < this.data.hoverDistance && distance > this.data.pressDistance){
           if (!this.hovered[i]) {

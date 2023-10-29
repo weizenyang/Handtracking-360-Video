@@ -37,8 +37,24 @@ import Card from '../components/Card.astro';
                     src="/sagia_scene_setter.mp4"
                 />
             </video>
-            <a-asset-item id="preview-plane" src="/preview-plane.glb"></a-asset-item>
 
+            <video
+                id="video-3"
+                style="display:none"
+                loop
+                crossorigin="anonymous"
+                playsinline
+                webkit-playsinline
+            >
+                <source
+                    type="video/mp4"
+                    src="/Lusail.mp4"
+                />
+            </video>
+            <a-asset-item id="preview-plane" src="/preview-plane.glb"></a-asset-item>
+            <audio id="hover" src="/Hover.mp3" preload="auto"/>
+            <audio id="pressStart" src="/PressStart.mp3" preload="auto"/>
+            <audio id="pressEnd" src="/PressEnd.mp3" preload="auto"/>
             <image id="ui-backplate" src="/UI-Backplate.png"></image>
             <image id="ui-backplate" src="/UI-Border.png"></image>
             <image id="neom-image" src="/Neom.png"/>
@@ -56,9 +72,9 @@ import Card from '../components/Card.astro';
 
         
 
-        <a-box color="tomato" depth="1" height="1" width="1" position="1 0 -2">
+        <!-- <a-box color="tomato" depth="1" height="1" width="1" position="1 0 -2">
 
-        </a-box>
+        </a-box> -->
 
         <!--  left: 1; right: 1; top; 1; bottom: 1; -->
         <!-- <a-gui-slider width="2.5" height="0.75"
@@ -66,30 +82,35 @@ import Card from '../components/Card.astro';
         percent="0.29"
         margin="0 0 0.05 0">
         <a-gui-button> -->
-            <a-entity position="0 0.95 -0.5" event-manager>
+            
+            <a-entity id="menu" position="0 1.1 -0.5" event-manager>
+                <a-entity>
+                    <a-entity id="video-1" class="video-selector collidable ui" button="label: Sagia" position="-0.35 0 0.07" rotation="0 25 0">
+                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
+                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Neom.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
+                        <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
+                        <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
+                    </a-entity>
+                    <a-entity id="video-2" class="video-selector collidable ui" button="label: Neom" position="0 0 0">
+                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
+                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Sagia.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
+                        <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
+                        <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
+                    </a-entity>
+                    <a-entity id="video-3" class="video-selector collidable ui" button="label: Lusail" position="0.35 0 0.07"  rotation="0 -25 0">
+                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Lusail.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
+                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity> -->
+                        <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
+                        <!-- <a-entity width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
+                    </a-entity>
+                    <a-entity id="clear" class="video-selector collidable ui" button="label: < Back" position="0 -0.25 0">
+                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.15; radius: 0.01; segments: 16;" outline-material="color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
+                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity> -->
+                        <!-- <a-plane class="background" width="1" height="0.25" slice9="width: 0.500; height: 0.2; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
+                        <!-- <a-entity class="border" width="1" height="0.25" slice9="width: 0.625; height: 0.15; left: 150; right: 250; top: 150; bottom: 250; side: front; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
+                    </a-entity>
+                </a-entity>
                 
-                <a-entity id="video-1" class="video-selector collidable ui" button="label: Sagia" position="-0.35 0 0">
-                    <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
-                    <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Neom.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
-                    <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                    <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
-                </a-entity>
-                <a-entity id="video-2" class="video-selector collidable ui" button="label: Neom" position="0 0 0">
-                    <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
-                    <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Sagia.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
-                    <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                    <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
-                </a-entity>
-                <a-entity id="none" class="video-selector collidable ui" button="label: (Video 3) Soon" position="0.35 0 0">
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity>
-                    <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                    <a-entity width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity>
-                </a-entity>
-                <a-entity id="clear" class="video-selector collidable ui" button="label: < Back" position="0 -0.25 0">
-                    <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity>
-                    <!-- <a-plane class="background" width="1" height="0.25" slice9="width: 0.500; height: 0.2; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                    <!-- <a-entity class="border" width="1" height="0.25" slice9="width: 0.625; height: 0.15; left: 150; right: 250; top: 150; bottom: 250; side: front; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
-                </a-entity>
             </a-entity>
             
         <!-- </a-gui-button>
@@ -134,8 +155,10 @@ import Card from '../components/Card.astro';
         <a-camera
             user-height="0.5"
             
-            collider-check>
-        
+            >
+            <a-entity id="hide-menu" position="0.035 -0.2 -0.6" rotation="-40 0 0" scale="0 0 0" button="label: ^">
+                <a-circle scale="0.05 0.05 0.05"  material="color: #555; transparent: true; opacity: 0.6; side: double;"></a-circle>
+            </a-entity>
         </a-camera>
     </a-scene>
 </Layout>
@@ -152,10 +175,14 @@ import Card from '../components/Card.astro';
     //         i.setAttribute(`outline-material`, `thickness: ${thickness}; edge: ${fade}`)
     //     })
     // }, 10000)
+
+import AframeDemo from "./aframe-demo.astro";
+
     
     // document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
     // document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
     
+
     AFRAME.registerComponent('collider-check', {
   dependencies: ['raycaster'],
 
