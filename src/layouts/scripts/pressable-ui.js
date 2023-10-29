@@ -29,27 +29,44 @@ AFRAME.registerComponent('pressable', {
           // distance = this.calculateFingerPlaneDistance(handEl.components['hand-tracking-controls'].indexTipPosition, this.el.querySelector(this.data.target).getAttribute('geometry').normal)
         }
 
-        if (distance <= this.data.pressDistance) {
-          if (!this.pressed[i]) { this.el.emit('pressedstarted'); }
-          this.pressed[i] = true;
-          this.hovered[i] = false;
+        if(distance <= this.data.pressDistance){
+          if (!this.pressed[i]){
+            this.el.emit('pressedstarted', {"hand": i});
+          }
         } else if(distance < this.data.hoverDistance && distance > this.data.pressDistance){
           if (!this.hovered[i]) {
-             this.el.emit('hoverstarted')
-             this.hovered[i] = true;
-            } else {
-            this.el.emit('hoverupdate', {"distance": distance});
+            this.el.emit('hoverstarted', {"hand": i})
+            this.hovered[i] = true;
           }
-          
         } else if(distance > this.data.hoverDistance){
-          
-          this.hovered[i] = false;
-          this.pressed[i] = false;
+          if (this.hovered[i]) { this.el.emit('hoverended', {"hand": i}) }
+          if (this.pressed[i]) { this.el.emit('pressedended', {"hand": i}) }
+            this.hovered[i] = false;
+            this.pressed[i] = false;
         }
-        
       }
-      if (!this.hovered[0] && !this.hovered[1]) { this.el.emit('hoverended') }
-      if (!this.pressed[0] && !this.pressed[1]) { this.el.emit('pressedended') }
+
+      //   if (distance <= this.data.pressDistance) {
+      //     if (!this.pressed[i]) { this.el.emit('pressedstarted'); }
+      //     this.pressed[i] = true;
+      //     this.hovered[i] = false;
+      //   } else if(distance < this.data.hoverDistance && distance > this.data.pressDistance){
+      //     if (!this.hovered[i]) {
+      //        this.el.emit('hoverstarted')
+      //        this.hovered[i] = true;
+      //       } else {
+      //       this.el.emit('hoverupdate', {"distance": distance});
+      //     }
+          
+      //   } else if(distance > this.data.hoverDistance){
+          
+      //     this.hovered[i] = false;
+      //     this.pressed[i] = false;
+      //   }
+        
+      // }
+      // if (!this.hovered[0] && !this.hovered[1]) { this.el.emit('hoverended') }
+      // if (!this.pressed[0] && !this.pressed[1]) { this.el.emit('pressedended') }
       
       // if (this.hovered) { this.el.emit('hoverended') }
       
