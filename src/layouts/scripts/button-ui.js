@@ -106,7 +106,7 @@ AFRAME.registerComponent('button', {
       var el = this.el;
       console.log("Press Started")
       // this.currentState = this.states.PRESSED;
-      this.thickness = 0.45
+      this.thickness = 0.50
       this.fade = 0.01
       // el.querySelector(".border").setAttribute("visible", "true")
       // el.querySelector(".border").setAttribute(`outline-material`, `thickness: ${currentThickness}; edge: 0.01`)
@@ -128,7 +128,7 @@ AFRAME.registerComponent('button', {
       // el.setAttribute('material', {color: 'green'});
       // el.querySelector(".border").setAttribute("outline-material", "thickness: 0.35; edge: 0.15")
       // el.querySelector(".border").setAttribute("visible", "true")
-      this.thickness = 0.55
+      this.thickness = 0.45
       this.fade = 0.01
       // this.currentState = this.states.HOVER;
     },
@@ -182,6 +182,7 @@ AFRAME.registerComponent('button', {
       // }
       console.log(`Target ${this.thickness} ${this.fade}`)
       if(Math.abs(this.thickness - this.currentThickness) > 0.001 || Math.abs(this.currentFade - this.fade) > 0.001 ){
+        console.log("updating")
       this.currentThickness += (this.thickness - this.currentThickness) * 0.5
       this.currentFade += (this.fade - this.currentFade) * 0.5
       if(el.querySelector(".border")){
