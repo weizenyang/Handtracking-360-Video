@@ -43,10 +43,14 @@ AFRAME.registerComponent('event-manager', {
           sphere.setAttribute(`autoplay`, ``)
           sphere.setAttribute('rotation',"0 270 0")
 
+          document.getElementById('clear').setAttribute('animation', 'property: scale; to: 1 1 1; from: 0 0 0;  dur: 500; easing: easeInOutQuad')
+
           setTimeout((e) => {
-            document.getElementById('menu').setAttribute('animation', 'property: scale; from: 1 1 1; to: 0 0 0;')
-            document.getElementById('hide-menu').setAttribute('animation', 'property: scale; from: 0 0 0; to: 1 1 1;')
-            document.getElementById('hide-menu').setAttribute('animation__2', 'property: position; from: 0.035 -0.5 -0.6; to: 0.035 -0.2 -0.6;')
+            document.getElementById('hide-menu').setAttribute('button', 'label: Show')
+            document.getElementById('menu').setAttribute('animation', 'property: scale; to: 0 0 0; from: 1 1 1;')
+            document.getElementById('menu').setAttribute('animation', 'property: scale; from: 1 1 1; to: 0 0 0;  dur: 500; easing: easeInOutCubic')
+            document.getElementById('hide-menu').setAttribute('animation', 'property: scale; from: 0 0 0; to: 1 1 1; dur: 500; easing: easeInOutQuad')
+            document.getElementById('hide-menu').setAttribute('animation__2', 'property: position; from: 0.0 -0.4 0.20; to: 0.0 -0.4 0.20;  dur: 500; easing: easeInOutCubic')
             
           }, 1500)
           

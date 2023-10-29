@@ -23,7 +23,7 @@ AFRAME.registerComponent('pressable', {
         if(this.data.target){
           distance = this.calculateFingerDistance(handEl.components['hand-tracking-controls'].indexTipPosition);
         } else {
-          console.log("tick")
+          
           console.log(this.el.querySelector(this.data.target).object3D)
           //Needs work
           // distance = this.calculateFingerPlaneDistance(handEl.components['hand-tracking-controls'].indexTipPosition, this.el.querySelector(this.data.target).getAttribute('geometry').normal)

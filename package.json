@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "aframe": "^1.4.2",
+    "aframe-look-at-component": "^1.0.0",
     "aframe-passthrough-component": "^1.0.0",
     "aframe-rounded": "^1.0.3",
     "aframe-slice9-component": "^1.0.0",

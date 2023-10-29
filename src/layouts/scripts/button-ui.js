@@ -1,7 +1,8 @@
 /* global AFRAME */
 AFRAME.registerComponent('button', {
     schema: {
-      label: {default: 'label'},
+      label: {default: ''},
+      textsize: {type: 'number', default: 0.75},
       width: {default: 0.11},
       toggable: {default: false}
     },
@@ -37,7 +38,8 @@ AFRAME.registerComponent('button', {
       labelEl.setAttribute('text', {
         value: this.data.label,
         color: 'white',
-        align: 'center'
+        align: 'center',
+
       });
 
       // this.hoverSound = document.createElement('a-sound');
@@ -59,7 +61,7 @@ AFRAME.registerComponent('button', {
 
       
   
-      labelEl.setAttribute('scale', '0.75 0.75 0.75');
+      labelEl.setAttribute('scale', `${this.data.textsize} ${this.data.textsize} ${this.data.textsize}`);
       this.el.appendChild(labelEl);
   
       this.bindMethods();
@@ -133,8 +135,13 @@ AFRAME.registerComponent('button', {
       el.setAttribute('sound', 'src: #pressStart; autoplay: true; volume: 3')
 
       if(this.el.id == "hide-menu"){
-        document.getElementById('menu').setAttribute('animation', 'property: scale; from: 0 0 0; to: 1 1 1;')
-        
+        if(document.getElementById('menu').object3D.scale.x < 1){
+          document.getElementById('hide-menu').setAttribute('button', 'label: Hide')
+          document.getElementById('menu').setAttribute('animation', 'property: scale; from: 0 0 0; to: 1 1 1;')
+        } else {
+          document.getElementById('hide-menu').setAttribute('button', 'label: Show')
+          document.getElementById('menu').setAttribute('animation', 'property: scale; to: 0 0 0; from: 1 1 1;')
+        }
       }
       // el.querySelector(".border").setAttribute("visible", "true")
       // el.querySelector(".border").setAttribute(`outline-material`, `thickness: ${currentThickness}; edge: 0.01`)
@@ -197,9 +204,13 @@ AFRAME.registerComponent('button', {
       if(this.el.hasAttribute('sound')){
         this.el.removeAttribute('sound')
       }
-      if(this.el.id == "hide-menu"){
-        this.el.setAttribute('animation', 'property: scale; from: 1 1 1; to: 0 0 0;')
-        document.getElementById('hide-menu').setAttribute('animation__2', 'property: position; from: 0.035 -0.2 -0.6; to: 0.035 -0.5 -0.6;')
+      if(this.el.id == "clear"){
+        this.el.setAttribute('animation', 'property: scale; from: 1 1 1; to: 0 0 0;  dur: 500; easing: easeInOutQuad')
+        if(document.getElementById('hide-menu').object3D.scale.x > 0){
+          document.getElementById('hide-menu').setAttribute('animation', 'property: scale; to: 0 0 0; from: 1 1 1; dur: 500; easing: easeInOutQuad')
+          document.getElementById('hide-menu').setAttribute('animation__2', 'property: position; from: 0.0 -0.4 0; to: 0.0 -0.8 0; dur: 500; easing: easeInOutCubic')
+        }
+        
       }
       
       
@@ -230,7 +241,7 @@ AFRAME.registerComponent('button', {
       //   this.thickness = 0.45
       //   this.fade = 0.01
       // }
-      console.log(`Target ${this.thickness} ${this.fade}`)
+      // console.log(`Target ${this.thickness} ${this.fade}`)
       if(Math.abs(this.thickness - this.currentThickness) > 0.001 || Math.abs(this.currentFade - this.fade) > 0.001 ){
         console.log("updating")
       this.currentThickness += (this.thickness - this.currentThickness) * 0.5
