@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LayoutSimple from '../layouts/Layout-Simple.astro';
+import Card from '../components/Card.astro';
+
+---
+
+<LayoutSimple title='hand-tracking'>
+    
+    <a-scene>
+        <a-assets>
+            <!-- Single source video. -->
+            <video
+                id="video-1"
+                loop="true"
+                preload="true"
+                src="https://ourexperiments.me/Pictures/ImmersiveStand_Flythrough.mp4"
+            >
+            </video>
+
+            <a-asset-item id="screens" src="/NMDC Screens.glb"></a-asset-item>
+
+        </a-assets>
+        <!-- Middle panel, 2560x1920 pixels
+        <!-- <a-plane position="0 1.5 -4" rotation="0 0 0" width="2.56" height="1.92" color="#FFF" material="side:double; src:#video-1; repeat: 0.3637 1; offset: 0.318 0.0"></a-plane> -->
+
+        <!-- Left panel, 2240x1920 pixels, rotated 90 degrees -->
+        <!-- <a-plane position="-1.28 1.5 -2.9" rotation="0 90 0" width="2.24" height="1.92" color="#FFF" material="side:double; src:#video-2; repeat: 0.318 1; offset: 0.0 0.0"></a-plane> -->
+
+        <!-- Right panel, 2240x1920 pixels, rotated -90 degrees -->
+        <!-- <a-plane position="1.28 1.5 -2.9" rotation="0 -90 0" width="2.24" height="1.92" color="#FFF" material="side:double; src:#video-3; repeat: 0.318 1; offset: 0.682 0.0"></a-plane> -->
+        <a-entity id="screens-model" gltf-model="#screens" position="0 1.5 -2.9" rotation="180 -90 0" scale="1.12 1.12 1.12"></a-entity>
+        <!-- Bottom panel, 2240x1920 pixels, rotated -90 degrees -->
+        <a-plane id="floor" position="0 0.54 -2.9" rotation="90 0 0" width="2.56" height="2.24" color="#AAA" material="side:double"></a-plane>
+
+        <!-- Top panel, 2240x1920 pixels, rotated -90 degrees -->
+        <a-plane id="ceiling" position="0 2.46 -2.9" rotation="90 0 0" width="2.56" height="2.24" color="#AAA" material="side:double"></a-plane>
+
+        <a-camera
+            user-height="0.5"
+            position="0 1.5 -2.3"
+            fov="130"
+            >
+        </a-camera>
+    </a-scene>
+</LayoutSimple>
+
+<script>
+     window.addEventListener('click', function () { 
+        document.querySelector('#video-1').play();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const model = document.querySelector('#screens-model');
+        const floor = document.querySelector('#floor');
+        const video = document.querySelector('#video-1');
+        const scene = document.querySelector('a-scene');
+        const videoTexture = new THREE.VideoTexture(video);
+
+        model.addEventListener('model-loaded', () => {
+            const mesh = model.getObject3D('mesh');
+            if (!mesh) return;
+            
+
+            mesh.traverse((node) => {
+                if (node.isMesh) {
+                    console.log(node);
+                    node.material =  new THREE.MeshStandardMaterial( { color: 0xffffff } );
+                    node.material.side = THREE.DoubleSide;
+                    
+                    // node.material.color.set(0xffffff);
+                    node.material.map = videoTexture;
+                    node.material.emissiveMap = videoTexture;
+                    node.material.needsUpdate = true;
+                }
+            });
+        });
+
+        scene.background = videoTexture;
+
+        floor.addEventListener('model-loaded', () => {
+            const mesh = floor.getObject3D('mesh');
+            if (!mesh) return;
+            
+
+            mesh.traverse((node) => {
+                if (node.isMesh) {
+                    console.log(node);
+                    node.material =  new THREE.MeshStandardMaterial( { color: 0x000000, metalness: 1.0, roughness: 0.1 } );
+                    // node.material.side = THREE.DoubleSide;
+                    // node.material.envMap = videoTexture;
+                }
+            });
+        });
+
+        });
+</script>
+		
