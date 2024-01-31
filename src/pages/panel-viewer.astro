@@ -47,55 +47,36 @@ import Card from '../components/Card.astro';
 </LayoutSimple>
 
 <script>
-     window.addEventListener('click', function () { 
+    window.addEventListener('click', function () { 
         document.querySelector('#video-1').play();
-
         console.log("Play");
     });
 
     document.addEventListener('DOMContentLoaded', () => {
         const model = document.querySelector('#screens-model');
-        const floor = document.querySelector('#floor');
         const video = document.querySelector('#video-1');
         const scene = document.querySelector('a-scene');
-        const videoTexture = new THREE.VideoTexture(video);
+        const videoTexture = new AFRAME.THREE.VideoTexture(video);
 
         model.addEventListener('model-loaded', () => {
             const mesh = model.getObject3D('mesh');
             if (!mesh) return;
-            
 
             mesh.traverse((node) => {
                 if (node.isMesh) {
                     console.log(node);
-                    node.material =  new THREE.MeshStandardMaterial( { color: 0xffffff } );
-                    node.material.side = THREE.DoubleSide;
-                    
-                    // node.material.color.set(0xffffff);
-                    node.material.map = videoTexture;
-                    node.material.emissiveMap = videoTexture;
+                    node.material = new AFRAME.THREE.MeshStandardMaterial({ 
+                        color: 0xffffff, 
+                        map: videoTexture,
+                        emissiveMap: videoTexture,
+                        side: AFRAME.THREE.DoubleSide
+                    });
                     node.material.needsUpdate = true;
                 }
             });
         });
 
         scene.background = videoTexture;
-
-        floor.addEventListener('model-loaded', () => {
-            const mesh = floor.getObject3D('mesh');
-            if (!mesh) return;
-            
-
-            mesh.traverse((node) => {
-                if (node.isMesh) {
-                    console.log(node);
-                    node.material =  new THREE.MeshStandardMaterial( { color: 0x000000, metalness: 1.0, roughness: 0.1 } );
-                    // node.material.side = THREE.DoubleSide;
-                    // node.material.envMap = videoTexture;
-                }
-            });
-        });
-
-        });
+    });
 </script>
 		
