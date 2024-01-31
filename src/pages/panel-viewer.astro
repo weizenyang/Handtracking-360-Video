@@ -7,7 +7,7 @@ import Card from '../components/Card.astro';
 
 <LayoutSimple title='hand-tracking'>
     
-    <a-scene>
+    <a-scene video-material="videoSelector: #video-1; modelSelector: #screens-model">
         <a-assets>
             <!-- Single source video. -->
             <video
@@ -49,34 +49,42 @@ import Card from '../components/Card.astro';
 <script>
     window.addEventListener('click', function () { 
         document.querySelector('#video-1').play();
+
         console.log("Play");
     });
+    AFRAME.registerComponent('video-material', {
+        schema: {
+            videoSelector: { type: 'selector' },
+            modelSelector: { type: 'selector' }
+        },
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const model = document.querySelector('#screens-model');
-        const video = document.querySelector('#video-1');
-        const scene = document.querySelector('a-scene');
-        const videoTexture = new AFRAME.THREE.VideoTexture(video);
+        init: function() {
+            const videoEl = this.data.videoSelector;
+            const modelEl = this.data.modelSelector;
+            const sceneEl = this.el.sceneEl;
+            const videoTexture = new AFRAME.THREE.VideoTexture(videoEl);
 
-        model.addEventListener('model-loaded', () => {
-            const mesh = model.getObject3D('mesh');
-            if (!mesh) return;
+            // videoEl.play();
 
-            mesh.traverse((node) => {
-                if (node.isMesh) {
-                    console.log(node);
-                    node.material = new AFRAME.THREE.MeshStandardMaterial({ 
-                        color: 0xffffff, 
-                        map: videoTexture,
-                        emissiveMap: videoTexture,
-                        side: AFRAME.THREE.DoubleSide
-                    });
-                    node.material.needsUpdate = true;
-                }
+            modelEl.addEventListener('model-loaded', () => {
+                const mesh = modelEl.getObject3D('mesh');
+                if (!mesh) return;
+
+                mesh.traverse((node) => {
+                    if (node.isMesh) {
+                        node.material = new AFRAME.THREE.MeshStandardMaterial({ 
+                            color: 0xffffff, 
+                            map: videoTexture,
+                            emissiveMap: videoTexture,
+                            side: AFRAME.THREE.DoubleSide
+                        });
+                        node.material.needsUpdate = true;
+                    }
+                });
             });
-        });
 
-        scene.background = videoTexture;
+            sceneEl.background = videoTexture;
+        }
     });
 </script>
 		
