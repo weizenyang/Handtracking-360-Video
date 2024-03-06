@@ -1,15 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 ---
 
-<Layout title='hand-tracking'>
-    
-    <a-scene renderer="antialias: true; colorManagement: true; sortObjects: false" load-content>
+<Layout title="hand-tracking">
+    <div id="init-settings" style="position: fixed; z-index: 100000;">
+        <label for="avatar">Choose videos:</label>
+        <input type="file" id="vid-1" name="vid-1" accept="video/mp4" />
+        <button id="start"></button>
+    </div>
+
+    <a-scene
+        renderer="antialias: true; colorManagement: true; sortObjects: false"
+        load-content
+        local-video
+    >
         <a-assets>
             <!-- Single source video. -->
-            <video
+            <!-- <video
                 id="video-1"
                 style="display:none"
                 loop
@@ -45,104 +53,95 @@ import Card from '../components/Card.astro';
                 load-content
                 src="https://ourexperiments.me/Lusail.mp4"
             >
-            </video>
-            <a-asset-item id="preview-plane" src="/preview-plane.glb"></a-asset-item>
-            <audio id="hover" src="/Hover.mp3" preload="auto"/>
-            <audio id="pressStart" src="/PressStart.mp3" preload="auto"/>
-            <audio id="pressEnd" src="/PressEnd.mp3" preload="auto"/>
-            <image id="ui-backplate" src="/UI-Backplate.png"></image>
-            <image id="ui-backplate" src="/UI-Border.png"></image>
-            <image id="neom-image" src="/Neom.png"/>
-            <image id="sagia-image" src="/Sagia.png"/>
+            </video> -->
+            <a-asset-item id="preview-plane" src="/preview-plane.glb"
+            ></a-asset-item>
+            <audio id="hover" src="/Hover.mp3" preload="auto"></audio>
+            <audio id="pressStart" src="/PressStart.mp3" preload="auto"></audio>
+            <audio id="pressEnd" src="/PressEnd.mp3" preload="auto"></audio>
+            <image id="ui-backplate" src="/UI-Backplate.png" />
+            <image id="ui-backplate" src="/UI-Border.png" />
+            <image id="neom-image" src="/Neom.png" />
+            <image id="sagia-image" src="/Sagia.png" />
         </a-assets>
-        
-        <!-- <a-entity id="leftHand"  hand-tracking-controls="hand: left; modelColor:#555555">
-            <a-text id="leftText" material="side: double"></a-text>
-            <a-entity raycaster="objects: .collidable; showLine: true;"></a-entity>
-        </a-entity>
-        <a-entity id="rightHand"  hand-tracking-controls="hand: right; modelColor:#555555">
-            <a-text id="rightText" material="side: double"></a-text>
-            <a-entity raycaster="objects: .collidable; showLine: true;"></a-entity>
-        </a-entity> -->
 
-        
-
-        <!-- <a-box color="tomato" depth="1" height="1" width="1" position="1 0 -2">
-
-        </a-box> -->
-
-        <!--  left: 1; right: 1; top; 1; bottom: 1; -->
-        <!-- <a-gui-slider width="2.5" height="0.75"
-        onclick="slideActionFunction"
-        percent="0.29"
-        margin="0 0 0.05 0">
-        <a-gui-button> -->
-            
-            <a-entity  position="1 1.1 -0.5" event-manager follow-pos="target: #camera-target-pos">
-                <a-entity id="hide-menu" look-at="a-camera" position="0.0 -0.4 0.20" button="label: Show; textsize: 0.5;" scale="0 0 0" >
-                    <!-- <a-triangle color="#FFFF00" vertex-a="0.05 0 0" vertex-b="-0.05 0 0" vertex-c="0 0.06 -0.025" material="color: #555; transparent: true; opacity: 0.4; side: front;"></a-triangle>
-                    <a-triangle color="#FFFF00" vertex-a="0.05 0 -0.07" vertex-b="-0.05 0 0" vertex-c="0 0.06 -0.025" material="color: #555; transparent: true; opacity: 0.4; side: front;"></a-triangle>
-                    <a-triangle color="#FFFF00" vertex-a="0.05 0 -0.07" vertex-b="0.05 0 0" vertex-c="0 0.06 -0.025" material="color: #555; transparent: true; opacity: 0.4; side: front;"></a-triangle> -->
-                    <a-circle scale="0.05 0.05 0.05" rotation="-40 0 0" material="color: #555; transparent: true; opacity: 0.4; side: double;"></a-circle>
-                </a-entity>
-                <a-entity id="menu" look-at="a-camera">
-                    <a-entity id="video-1" class="video-selector collidable ui" button="label: Sagia" position="-0.35 0 0.07" rotation="0 25 0">
-                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
-                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Neom.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
-                        <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                        <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
-                    </a-entity>
-                    <a-entity id="video-2" class="video-selector collidable ui" button="label: Neom" position="0 0 0">
-                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #ff0;"></a-entity> -->
-                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Sagia.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
-                        <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                        <!-- <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
-                    </a-entity>
-                    <a-entity id="video-3" class="video-selector collidable ui" button="label: Lusail" position="0.35 0 0.07"  rotation="0 -25 0">
-                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" outline-material="map: /Lusail.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
-                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity> -->
-                        <!-- <a-plane class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                        <!-- <a-entity width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
-                    </a-entity>
-                    <a-entity id="clear" class="video-selector collidable ui" button="label: < Back" scale="0 0 0" position="0 -0.25 0">
-                        <a-entity class="border" rounded-plane="width: 0.3125; height: 0.15; radius: 0.01; segments: 16;" outline-material="color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2" position="0 0 0.001"></a-entity>
-                        <!-- <a-entity rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;" material="color: #000; transparent: true; opacity: 0.6;"></a-entity> -->
-                        <!-- <a-plane class="background" width="1" height="0.25" slice9="width: 0.500; height: 0.2; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; opacity: 0.5; src: /UI-Backplate.png" ></a-plane> -->
-                        <!-- <a-entity class="border" width="1" height="0.25" slice9="width: 0.625; height: 0.15; left: 150; right: 250; top: 150; bottom: 250; side: front; padding: 0.1; opacity: 0.6; src: /UI-Border.png;" visible="false" position="0 0 0.001"></a-entity> -->
-                    </a-entity>
-                </a-entity>
-                
+        <a-entity
+            position="1 1.1 -0.5"
+            event-manager
+            follow-pos="target: #camera-target-pos"
+        >
+            <a-entity
+                id="hide-menu"
+                look-at="a-camera"
+                position="0.0 -0.4 0.20"
+                button="label: Show; textsize: 0.5;"
+                scale="0 0 0"
+            >
+                <a-circle
+                    scale="0.05 0.05 0.05"
+                    rotation="-40 0 0"
+                    material="color: #555; transparent: true; opacity: 0.4; side: double;"
+                ></a-circle>
             </a-entity>
-            
-        <!-- </a-gui-button>
-            <a-entity class="collidable ui">
-                <a-entity class="background" width="0.75" height="0.5" slice9="width: 0.3125; height: 0.25; left:270; right: 130; top: 270; bottom: 130; side: double; padding: 0.1; src: /UI-Backplate.png" position="0 1 -0.5"></a-entity>
-                <a-entity class="border" width="0.75" height="0.5" slice9="width:  0.3125; height: 0.25; left:0; right: 0; top: 0; bottom: 0; side: double; padding: 0; src: /UI-Border.png; transparent: true; opacity: 0.5" position="0 1 -0.5"></a-entity>
-            </a-entity>
-        </a-gui-slider> -->
-        
-
-        <!-- <a-entity id="menu" menu position="0 1.0 -0.5" rotation="-45 0 0" event-manager> -->
-            <!-- <a-entity slider position="0 0.10 0"></a-entity> -->
-            <!-- <a-entity class="video-selector" id="video-1" button="label: video-1; " position="-0.15 0 0"></a-entity>
-            <a-entity class="video-selector" id="video-2" button="label: video-2" position="0 0 0"></a-entity>
-            <a-entity class="video-selector" id="video-3" button="label: video-3" position="0.15 0 0"></a-entity> -->
-            <!-- <a-entity id="clear" button="label: Clear; width: 0.20;" position="0 -0.10 0"></a-entity> -->
-        <!-- </a-entity> -->
-          <a-entity hand-tracking-controls="hand: left"></a-entity>
-          <a-entity hand-tracking-controls="hand: right"></a-entity>
-
-          <a-entity id="sphere-container">
-            <!-- <a-videosphere
-                rotation="0 0 0"
-                src="#video-1"
-                id="sphere-video-1"
-                visible="false"
+            <a-entity id="menu" look-at="a-camera">
+                <a-entity
+                    id="video-1"
+                    class="video-selector collidable ui"
+                    button="label: Sagia"
+                    position="-0.35 0 0.07"
+                    rotation="0 25 0"
                 >
-            </a-videosphere> -->
-          </a-entity>
-        
-          
+                    <a-entity
+                        class="border"
+                        rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;"
+                        outline-material="map: /Neom.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2"
+                        position="0 0 0.001"></a-entity>
+                </a-entity>
+                <a-entity
+                    id="video-2"
+                    class="video-selector collidable ui"
+                    button="label: Neom"
+                    position="0 0 0"
+                >
+                    <a-entity
+                        class="border"
+                        rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;"
+                        outline-material="map: /Sagia.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2"
+                        position="0 0 0.001"></a-entity>
+                </a-entity>
+                <a-entity
+                    id="video-3"
+                    class="video-selector collidable ui"
+                    button="label: Lusail"
+                    position="0.35 0 0.07"
+                    rotation="0 -25 0"
+                >
+                    <a-entity
+                        class="border"
+                        rounded-plane="width: 0.3125; height: 0.25; radius: 0.04; segments: 16;"
+                        outline-material="map: /Lusail.png; color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2"
+                        position="0 0 0.001"></a-entity>
+                </a-entity>
+                <a-entity
+                    id="clear"
+                    class="video-selector collidable ui"
+                    button="label: < Back"
+                    scale="0 0 0"
+                    position="0 -0.25 0"
+                >
+                    <a-entity
+                        class="border"
+                        rounded-plane="width: 0.3125; height: 0.15; radius: 0.01; segments: 16;"
+                        outline-material="color: #fff; thickness: 0.0; edge: 0.0; radius: 0.2; alpha: 0.2"
+                        position="0 0 0.001"></a-entity>
+                </a-entity>
+            </a-entity>
+        </a-entity>
+
+        <a-entity hand-tracking-controls="hand: left"></a-entity>
+        <a-entity hand-tracking-controls="hand: right"></a-entity>
+
+        <a-entity id="sphere-container"></a-entity>
 
         <a-videosphere
             rotation="0 180 0"
@@ -151,138 +150,176 @@ import Card from '../components/Card.astro';
             visible="false"
         >
         </a-videosphere>
-        <!-- <a-passthrough width="16" height="9"></a-passthrough> -->
 
-        <a-camera
-            user-height="0.5"
-            
-            >
-            
-            <a-entity id="camera-target-pos" position="0.035 -0.2 -0.6"></a-entity>
-            <a-entity id="camera-hide-pos" position="0.035 -0.4 -0.6"></a-entity>
+        <a-camera user-height="0.5">
+            <a-entity id="camera-target-pos" position="0.035 -0.2 -0.6"
+            ></a-entity>
+            <a-entity id="camera-hide-pos" position="0.035 -0.4 -0.6"
+            ></a-entity>
         </a-camera>
     </a-scene>
+
+    <script>
+        var videoInput1;
+        AFRAME.registerComponent("local-video", {
+            init: function() {
+                videoInput1 = document.getElementById("vid-1");
+                console.log("vid-1");
+                console.log(document.getElementById("vid-1"));
+                document.getElementById("start").addEventListener("click", (e) => {
+                document.getElementById("init-settings").style.display = "none";
+        });
+            }
+        })
+        var videoData = [];
+    
+        
+    
+        
+        
+        videoInput1.addEventListener("change", function () {
+            const video = this.files[0];
+            const url = URL.createObjectURL(video);
+            document.getElementById('video-1').setAttribute('src', `${url}`);
+            console.log(document.getElementById('video-1'));
+        });
+    
+    
+        // const videoInput1 = document.getElementById("vid-1");
+        // videoInput1.addEventListener("change", function () {
+        //     const video = this.files[0];
+        //     const url = URL.createObjectURL(video);
+        //     videoData.push(url);
+        // });
+    
+        // const videoInput1 = document.getElementById("vid-1");
+        // videoInput1.addEventListener("change", function () {
+        //     const video = this.files[0];
+        //     const url = URL.createObjectURL(video);
+        //     videoData.push(url);
+        // });
+    
+    
+        import AframeDemo from "./aframe-demo.astro";
+    
+        // document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
+        // document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
+        // AFRAME.registerComponent('video-loader', {
+        //     schema:{
+        //         src: {
+        //             id: 'string'
+        //         }
+        //     },
+        //     init: function() {
+        //         const videoEl = document.createElement('video');
+        //     }
+        // })
+    
+        // id="video-1"
+        //             style="display:none"
+        //             loop
+        //             crossorigin="anonymous"
+        //             preload="auto"
+        //             playsinline
+        //             webkit-playsinline
+    
+        AFRAME.registerComponent("collider-check", {
+            dependencies: ["raycaster"],
+    
+            init: function () {
+                this.animate = false;
+                var intersectedItems = [];
+                // this.el.addEventListener('raycaster-intersection', function (e) {
+    
+                //   e.detail.els.map((i) => {
+    
+                //     if(i.classList.contains("collidable")){
+    
+                //         intersectedItems.push(i)
+                //     } else if(i.object3D.el.parentEl.classList.contains("collidable")){
+                //         intersectedItems.push(i.object3D.el.parentEl)
+                //     }
+                //   })
+                // //   console.log(intersectedItems)
+                //   if(intersectedItems.length > 1){
+                //     if(intersectedItems[0].classList.contains('ui')){
+                //     const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
+    
+                //     currentAtt.left = 270
+                //     currentAtt.top = 270
+                //     currentAtt.right = 130
+                //     currentAtt.bottom = 130
+                //     // left:90; right: 310; top: 90; bottom: 310;
+                //     // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
+                //     console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
+                //     const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
+                //     intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
+                //   }
+                //   }
+    
+                // });
+    
+                // this.el.addEventListener('raycaster-intersection', function (e) {
+    
+                //   e.detail.els.map((i) => {
+    
+                //     if(i.classList.contains("collidable")){
+    
+                //         intersectedItems.push(i)
+                //     } else if(i.object3D.el.parentEl.classList.contains("collidable")){
+                //         intersectedItems.push(i.object3D.el.parentEl)
+                //     }
+                //   })
+                // //   console.log(intersectedItems)
+                //   if(intersectedItems.length > 1){
+                //     if(intersectedItems[0].classList.contains('ui')){
+                //     const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
+    
+                //     currentAtt.left = 270
+                //     currentAtt.top = 270
+                //     currentAtt.right = 130
+                //     currentAtt.bottom = 130
+                //     currentAtt.padding = 0.1
+                //     // left:90; right: 310; top: 90; bottom: 310;
+                //     // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
+                //     console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
+                //     const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
+                //     intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
+                //   }
+                //   }
+    
+                // });
+    
+                // this.el.addEventListener('raycaster-intersection-cleared', function (e) {
+    
+                // //   console.log(intersectedItems)
+                //   if(intersectedItems.length > 1){
+                //     intersectedItems.forEach(e => {
+                //         if(intersectedItems[0].classList.contains('ui')){
+                //     const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
+    
+                //     currentAtt.left = 0
+                //     currentAtt.top = 0
+                //     currentAtt.right = 0
+                //     currentAtt.bottom = 0
+                //     currentAtt.padding = 0
+                //     // left:90; right: 310; top: 90; bottom: 310;
+                //     // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
+                //     console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
+                //     const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
+                //     intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
+                //   }
+                //     })
+                //     intersectedItems = []
+                //   }
+    
+                // });
+            },
+            tick() {},
+        });
+    </script>
 </Layout>
-		
-<script>
-    // setInterval((e) => {
-    //     document.querySelectorAll(".border").forEach((i) => {
-    //         console.log("set")
-    //         const map = i.getAttribute('outline-material')
-    //         var thickness = map.thickness
-    //         var fade = map.edge
-    //         thickness -= 0.05
-    //         fade -= 0.05
-    //         i.setAttribute(`outline-material`, `thickness: ${thickness}; edge: ${fade}`)
-    //     })
-    // }, 10000)
-    
 
-import AframeDemo from "./aframe-demo.astro";
 
-    
-    // document.getElementById("leftText").setAttribute("value", document.getElementById("leftHand").object3D.position)
-    // document.getElementById("rightText").setAttribute("value", document.getElementById("rightHand").object3D.position)
-    
-
-    AFRAME.registerComponent('collider-check', {
-  dependencies: ['raycaster'],
-
-  init: function () {
-    this.animate = false
-    var intersectedItems = []
-    // this.el.addEventListener('raycaster-intersection', function (e) {
-      
-    //   e.detail.els.map((i) => {
-        
-    //     if(i.classList.contains("collidable")){
-            
-    //         intersectedItems.push(i)
-    //     } else if(i.object3D.el.parentEl.classList.contains("collidable")){
-    //         intersectedItems.push(i.object3D.el.parentEl)
-    //     }
-    //   })
-    // //   console.log(intersectedItems)
-    //   if(intersectedItems.length > 1){
-    //     if(intersectedItems[0].classList.contains('ui')){
-    //     const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
-        
-    //     currentAtt.left = 270
-    //     currentAtt.top = 270
-    //     currentAtt.right = 130
-    //     currentAtt.bottom = 130
-    //     // left:90; right: 310; top: 90; bottom: 310;
-    //     // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
-    //     console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
-    //     const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
-    //     intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
-    //   }
-    //   }
-      
-    // });
-    
-    // this.el.addEventListener('raycaster-intersection', function (e) {
-      
-    //   e.detail.els.map((i) => {
-        
-    //     if(i.classList.contains("collidable")){
-            
-    //         intersectedItems.push(i)
-    //     } else if(i.object3D.el.parentEl.classList.contains("collidable")){
-    //         intersectedItems.push(i.object3D.el.parentEl)
-    //     }
-    //   })
-    // //   console.log(intersectedItems)
-    //   if(intersectedItems.length > 1){
-    //     if(intersectedItems[0].classList.contains('ui')){
-    //     const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
-        
-    //     currentAtt.left = 270
-    //     currentAtt.top = 270
-    //     currentAtt.right = 130
-    //     currentAtt.bottom = 130
-    //     currentAtt.padding = 0.1
-    //     // left:90; right: 310; top: 90; bottom: 310;
-    //     // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
-    //     console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
-    //     const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
-    //     intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
-    //   }
-    //   }
-      
-    // });
-
-    // this.el.addEventListener('raycaster-intersection-cleared', function (e) {
-      
-    // //   console.log(intersectedItems)
-    //   if(intersectedItems.length > 1){
-    //     intersectedItems.forEach(e => {
-    //         if(intersectedItems[0].classList.contains('ui')){
-    //     const currentAtt = intersectedItems[0].querySelector('.border').getAttribute("slice9")
-        
-    //     currentAtt.left = 0
-    //     currentAtt.top = 0
-    //     currentAtt.right = 0
-    //     currentAtt.bottom = 0
-    //     currentAtt.padding = 0
-    //     // left:90; right: 310; top: 90; bottom: 310;
-    //     // intersectedItems[0].querySelector('.border').removeAttribute("slice9")
-    //     console.log(JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; '))
-    //     const jsonString = JSON.stringify(currentAtt).replace(/[{}"]/g, '').replace(/,/g, '; ')
-    //     intersectedItems[0].querySelector('.border').setAttribute(`slice9`, `${jsonString}`)
-    //   }
-    //     })
-    //     intersectedItems = []
-    //   }
-      
-    // });
-
-    
-  }, 
-  tick(){
-    
-}
-});
-</script>
 
 <!-- <script src="https://aframe.io/releases/1.4.0/aframe.min.js" is:inline></script> -->

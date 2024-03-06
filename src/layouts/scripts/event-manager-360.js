@@ -59,6 +59,29 @@ AFRAME.registerComponent('event-manager', {
           setTimeout((e) => {
             document.querySelector(`a-videosphere`).components.material.material.map.image.play();
           }, 500)
+        } else if(evt.target.getAttribute('src') != null || evt.target.getAttribute('src') != ""){
+          const sphere = document.createElement("a-videosphere")
+          sphere.setAttribute("visible", "true")
+          sphere.setAttribute(`src`, `${evt.target.getAttribute('src')}`)
+          sphere.setAttribute(`autoplay`, ``)
+          sphere.setAttribute('rotation',"0 270 0")
+
+          document.getElementById('clear').setAttribute('animation', 'property: scale; to: 1 1 1; from: 0 0 0;  dur: 500; easing: easeInOutQuad')
+
+          setTimeout((e) => {
+            document.getElementById('hide-menu').setAttribute('button', 'label: Show')
+            document.getElementById('menu').setAttribute('animation', 'property: scale; to: 0 0 0; from: 1 1 1;')
+            document.getElementById('menu').setAttribute('animation', 'property: scale; from: 1 1 1; to: 0 0 0;  dur: 500; easing: easeInOutCubic')
+            document.getElementById('hide-menu').setAttribute('animation', 'property: scale; from: 0 0 0; to: 1 1 1; dur: 500; easing: easeInOutQuad')
+            document.getElementById('hide-menu').setAttribute('animation__2', 'property: position; from: 0.0 -0.4 0.20; to: 0.0 -0.4 0.20;  dur: 500; easing: easeInOutCubic')
+            
+          }, 1500)
+          
+          
+          container.appendChild(sphere)
+          setTimeout((e) => {
+            document.querySelector(`a-videosphere`).components.material.material.map.image.play();
+          }, 500)
         }
         
         
